@@ -6,20 +6,19 @@ namespace Pokemon {
 
     public class Pokemon {
 
-        PokemonBase _base;
-        int level;
-        
+        public PokemonBase Base { get; set };
+        public int Level { get; set };
         public int HP { get; set; }
         public List<Move> Moves { get; set; }
 
         public Pokemon(PokemonBase pBase, int pLevel) {
-            _base = base;
-            level = pLevel;
-            HP = _base.MaxHp;
+            Base = pBase;
+            Level = pLevel;
+            HP = MaxHp;
 
             Moves = new List<Move>();
-            foreach (var move in _base.LearnableMoves) {
-                if (move.Level <= level) {
+            foreach (var move in Base.LearnableMoves) {
+                if (move.Level <= Level) {
                     Moves.Add(new Move(move.Base));
                 }
 
@@ -31,32 +30,32 @@ namespace Pokemon {
 
         public int MaxHp {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.MaxHp * level) / 100f) + 10; }
+            get { return Math.FloorToInt((Base.MaxHp * Level) / 100f) + 10; }
         }
 
         public int Attack {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.Attack * level) / 100f) + 5; }
+            get { return Math.FloorToInt((Base.Attack * Level) / 100f) + 5; }
         }
 
         public int Defence {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.Defence * level) / 100f) + 5; }
+            get { return Math.FloorToInt((Base.Defence * Level) / 100f) + 5; }
         }
 
         public int Speed {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.Speed * level) / 100f) + 5; }
+            get { return Math.FloorToInt((Base.Speed * Level) / 100f) + 5; }
         }
 
         public int SpAttack {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.SpAttack * level) / 100f) + 5; }
+            get { return Math.FloorToInt((Base.SpAttack * Level) / 100f) + 5; }
         }
 
         public int SpDefence {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.SpDefence * level) / 100f) + 5; }
+            get { return Math.FloorToInt((Base.SpDefence * Level) / 100f) + 5; }
         }
 
     }
