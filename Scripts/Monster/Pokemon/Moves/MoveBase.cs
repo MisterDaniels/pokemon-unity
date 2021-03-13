@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pokemon.Move {
+namespace Pokemon.Moves {
     
-    [CreateAssetMenu(fileName = "Move", menuName = "Pokemon/Move/Create", order = 0)]
+    [CreateAssetMenu(fileName = "Move", menuName = "Pokémon/Move/Create", order = 0)]
 
     public class MoveBase : ScriptableObject {
         

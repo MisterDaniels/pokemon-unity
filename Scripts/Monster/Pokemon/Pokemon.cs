@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pokemon.Moves;
 
 namespace Pokemon {
 
@@ -13,7 +14,7 @@ namespace Pokemon {
         public List<Move> Moves { get; set; }
 
         public Pokemon(PokemonBase pBase, int pLevel) {
-            _base = base;
+            _base = pBase;
             level = pLevel;
             HP = _base.MaxHp;
 
@@ -31,32 +32,32 @@ namespace Pokemon {
 
         public int MaxHp {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.MaxHp * level) / 100f) + 10; }
+            get { return Mathf.FloorToInt((_base.MaxHp * level) / 100f) + 10; }
         }
 
         public int Attack {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.Attack * level) / 100f) + 5; }
+            get { return Mathf.FloorToInt((_base.Attack * level) / 100f) + 5; }
         }
 
         public int Defence {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.Defence * level) / 100f) + 5; }
+            get { return Mathf.FloorToInt((_base.Defence * level) / 100f) + 5; }
         }
 
         public int Speed {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.Speed * level) / 100f) + 5; }
+            get { return Mathf.FloorToInt((_base.Speed * level) / 100f) + 5; }
         }
 
         public int SpAttack {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.SpAttack * level) / 100f) + 5; }
+            get { return Mathf.FloorToInt((_base.SpAttack * level) / 100f) + 5; }
         }
 
         public int SpDefence {
             // Pokémon original formula
-            get { return Math.FloorToInt((_base.SpDefence * level) / 100f) + 5; }
+            get { return Mathf.FloorToInt((_base.SpDefence * level) / 100f) + 5; }
         }
 
     }

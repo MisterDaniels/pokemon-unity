@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pokemon.Move {
+namespace Pokemon.Moves {
 
     public class Move {
 
