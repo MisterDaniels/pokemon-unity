@@ -7,20 +7,19 @@ namespace Pokemon {
 
     public class Pokemon {
 
-        PokemonBase _base;
-        int level;
-        
+        public PokemonBase Base { get; set };
+        public int Level { get; set };
         public int HP { get; set; }
         public List<Move> Moves { get; set; }
 
         public Pokemon(PokemonBase pBase, int pLevel) {
-            _base = pBase;
-            level = pLevel;
+            Base = pBase;
+            Level = pLevel;
             HP = _base.MaxHp;
 
             Moves = new List<Move>();
-            foreach (var move in _base.LearnableMoves) {
-                if (move.Level <= level) {
+            foreach (var move in Base.LearnableMoves) {
+                if (move.Level <= Level) {
                     Moves.Add(new Move(move.Base));
                 }
 
