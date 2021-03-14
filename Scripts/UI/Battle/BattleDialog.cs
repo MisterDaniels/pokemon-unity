@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Monster.Pokemon.Moves;
 
 namespace UI.Battle {
 
     public class BattleDialog : MonoBehaviour {
 
         [SerializeField] int lettersPerSecond = 30;
-        [SerializeFIeld] Color hightlightedColor;
+        [SerializeField] Color hightlightedColor;
 
         [SerializeField] Text dialogText;
         [SerializeField] GameObject actionSelector;
         [SerializeField] GameObject moveSelector;
-        [SerializeField] GameObject moveDetails;
 
         [SerializeField] List<Text> actionTexts;
-        [SerializeField] List<Text> moveTexts;
-
-        [SerializeField] Text ppText;
-        [SerializeField] Text typeText;
+        [SerializeField] List<GameObject> moveObjects;
 
         public void SetDialog(string dialog) {
             dialogText.text = dialog;
@@ -44,15 +41,46 @@ namespace UI.Battle {
 
         public void EnableMoveSelector(bool enabled) {
             moveSelector.SetActive(enabled);
-            moveDetails.SetActive(enabled);
         }
 
         public void UpdateActionSelection(int selectedAction) {
-            for (int i = 0; i < actionTexts.Count; ++i) {
+            for (int i = 0; i < actionTexts.Count; i++) {
                 if (i == selectedAction) {
                     actionTexts[i].color = hightlightedColor;
                 } else {
                     actionTexts[i].color = Color.black;
+                }
+            }
+        }
+
+        public void UpdateMoveSelection(int selectedMove) {
+            for (int i = 0; i < moveObjects.Count; i++) {
+                if (i == selectedMove) {
+                    moveObjects[i].GetComponent<Image>().color = hightlightedColor;
+                } else {
+                    moveObjects[i].GetComponent<Image>().color = Color.white;
+                }
+            }
+        }
+
+        public void SetMoves(List<Move> moves) {
+            for (int i = 0; i < moveObjects.Count; i++) {
+                if (i < moves.Count) {
+                    var moveNameText = moveObjects[i].transform.Find("Name");
+                    var movePPText = moveObjects[i].transform.Find("PP");
+                    var moveTypeText = moveObjects[i].transform.Find("Type");
+
+                    if (moveNameText) {
+                        moveNameText.GetComponent<Text>().text = moves[i].Base.Name;
+                    }
+
+                    if (movePPText) {
+                        movePPText.GetComponent<Text>().text = $"PP { moves[i].Base.PP.ToString() }/{ moves[i].Base.PP.ToString() }";
+                    }
+
+                    if (moveTypeText) {
+                        moveTypeText.GetComponent<Text>().text = moves[i].Base.Type.ToString();
+                    }
                 }
             }
         }

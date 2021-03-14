@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pokemon.Moves {
+namespace Monster.Pokemon.Moves {
     
     [CreateAssetMenu(fileName = "Move", menuName = "Pokémon/Move/Create", order = 0)]
 

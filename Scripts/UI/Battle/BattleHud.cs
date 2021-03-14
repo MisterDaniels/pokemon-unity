@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Pokemon;
+using Monster.Pokemon;
 
 namespace UI.Battle {
 
@@ -12,10 +12,18 @@ namespace UI.Battle {
         [SerializeField] Text levelText;
         [SerializeField] HPBar hpBar;
 
+        Pokemon _pokemon;
+
         public void SetData(Pokemon pokemon) {
-            nameText.text = pokemon.Base.Name;
-            levelText.text = "Lvl " + pokemon.Level;
-            hpBar.SetHP((float) pokemon.HP / pokemon.MaxHp);
+            _pokemon = pokemon;
+
+            nameText.text = _pokemon.Base.Name;
+            levelText.text = "Lv. " + _pokemon.Level;
+            hpBar.SetHP((float) _pokemon.HP / _pokemon.MaxHp);
+        }
+
+        public IEnumerator UpdateHP() {
+            yield return hpBar.SetHPSmooth((float) _pokemon.HP / _pokemon.MaxHp);
         }
 
     }
