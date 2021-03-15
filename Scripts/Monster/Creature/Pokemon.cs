@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster.Pokemon.Moves;
+using Monster.Creature.Moves;
 
-namespace Monster.Pokemon {
+namespace Monster.Creature {
 
+    [System.Serializable]
     public class Pokemon {
 
-        public PokemonBase Base { get; set; }
-        public int Level { get; set; }
+        [SerializeField] PokemonBase _base;
+        [SerializeField] int level;
+
+        public PokemonBase Base { 
+            get {
+                return _base;
+            } 
+        }
+        public int Level { 
+            get {
+                return level;
+            } 
+        }
+
         public int HP { get; set; }
         public List<Move> Moves { get; set; }
 
-        public Pokemon(PokemonBase pBase, int pLevel) {
-            Base = pBase;
-            Level = pLevel;
+        public void Init() {
             HP = MaxHp;
 
             Moves = new List<Move>();
@@ -59,21 +70,37 @@ namespace Monster.Pokemon {
             get { return Mathf.FloorToInt((Base.SpDefence * Level) / 100f) + 5; }
         }
 
-        public bool TakeDamage(Move move, Pokemon attacker) {
+        public DamageDetails TakeDamage(Move move, Pokemon attacker) {
+            float critical = 1f;
+            if (Random.value * 100f <= 6.25f) {
+                critical = 2f;
+            }
+
             // Pokémon original formula
-            float modifiers = Random.Range(0.85f, 1f);
+            float TypeEffectiveness = TypeChart.GetEffectiveness(move.Base.Type, Base.MainType) * TypeChart.GetEffectiveness(move.Base.Type, Base.SubType);
+
+            var DamageDetails = new DamageDetails() {
+                TypeEffectiveness = TypeEffectiveness,
+                Critical = critical,
+                Fainted = false
+            };
+
+            float attack = (move.Base.IsSpecial) ? attacker.SpAttack : attacker.Attack;
+            float defence = (move.Base.IsSpecial) ? SpDefence : Defence;
+
+            float modifiers = Random.Range(0.85f, 1f) * TypeEffectiveness * critical;
             float a = (2 * attacker.Level + 10) / 250f;
-            float d = a * move.Base.Power * ((float) attacker.Attack / Defence ) + 2;
+            float d = a * move.Base.Power * ((float) attack / defence ) + 2;
             int damage = Mathf.FloorToInt(d * modifiers);
 
             HP -= damage;
             
             if (HP <= 0) {
                 HP = 0;
-                return true;
+                DamageDetails.Fainted = true;
             }
 
-            return false;
+            return DamageDetails;
         }
 
         public Move GetRandomMove() {
@@ -81,6 +108,14 @@ namespace Monster.Pokemon {
 
             return Moves[r];
         }
+
+    }
+
+    public class DamageDetails {
+
+        public bool Fainted { get; set; }
+        public float Critical { get; set; }
+        public float TypeEffectiveness { get; set; }
 
     }
 

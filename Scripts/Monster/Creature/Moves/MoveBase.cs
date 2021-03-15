@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monster.Pokemon.Moves {
+namespace Monster.Creature.Moves {
     
     [CreateAssetMenu(fileName = "Move", menuName = "Pokémon/Move/Create", order = 0)]
 
@@ -37,6 +37,17 @@ namespace Monster.Pokemon.Moves {
 
         public int PP {
             get { return pp; }
+        }
+
+        public bool IsSpecial {
+            get {
+                if (type == PokemonType.Fire || type == PokemonType.Water || type == PokemonType.Grass || 
+                    type == PokemonType.Ice || type == PokemonType.Electric || type == PokemonType.Dragon) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
 
     }

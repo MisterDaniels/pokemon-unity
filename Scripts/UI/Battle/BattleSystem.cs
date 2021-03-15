@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Monster.Pokemon;
+using Monster.Creature;
 
 public enum BattleState {
     Start,
@@ -22,19 +23,27 @@ namespace UI.Battle {
         [SerializeField] BattleHud enemyHud;
         [SerializeField] BattleDialog dialogBox;
 
+        public event Action<bool> OnBattleOver;
+
         BattleState state;
         int currentAction;
         int currentMove;
 
-        private void Start() {
+        PokemonParty playerParty;
+        Pokemon wildPokemon;
+
+        public void StartBattle(PokemonParty playerParty, Pokemon wildPokemon) {
+            this.playerParty = playerParty;
+            this.wildPokemon = wildPokemon;
+
             StartCoroutine(SetupBattle());
         }
 
         public IEnumerator SetupBattle() {
-            playerUnit.Setup();
+            playerUnit.Setup(playerParty.GetHealthyPokemon());
             playerHud.SetData(playerUnit.Pokemon);
 
-            enemyUnit.Setup();
+            enemyUnit.Setup(wildPokemon);
             enemyHud.SetData(enemyUnit.Pokemon);
 
             yield return dialogBox.TypeDialog($"A wild { enemyUnit.Pokemon.Base.Name } appeared");
@@ -62,14 +71,23 @@ namespace UI.Battle {
             state = BattleState.Busy;
 
             var move = playerUnit.Pokemon.Moves[currentMove];
+            move.PP--;
+
             yield return dialogBox.TypeDialog($"{ playerUnit.Pokemon.Base.Name } used { move.Base.Name }");
             
+            StartCoroutine(playerUnit.PlayAttackAnimation());
+            enemyUnit.PlayHitAnimation();
+
             var damageDetails = enemyUnit.Pokemon.TakeDamage(move, playerUnit.Pokemon);
             yield return enemyHud.UpdateHP();
             yield return ShowDamageDetails(damageDetails);
 
             if (damageDetails.Fainted) {
                 yield return dialogBox.TypeDialog($"{ enemyUnit.Pokemon.Base.Name } Fainted");
+                enemyUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(2f);
+                OnBattleOver(true);
             } else {
                 StartCoroutine(EnemyMove());
             }
@@ -79,15 +97,36 @@ namespace UI.Battle {
             state = BattleState.EnemyMove;
 
             var move = enemyUnit.Pokemon.GetRandomMove();
+            move.PP--;
 
             yield return dialogBox.TypeDialog($"{ enemyUnit.Pokemon.Base.Name } used { move.Base.Name }");
             
+            StartCoroutine(enemyUnit.PlayAttackAnimation());
+            playerUnit.PlayHitAnimation();
+
             var damageDetails = playerUnit.Pokemon.TakeDamage(move, enemyUnit.Pokemon);
             yield return playerHud.UpdateHP();
             yield return ShowDamageDetails(damageDetails);
 
             if (damageDetails.Fainted) {
                 yield return dialogBox.TypeDialog($"{ playerUnit.Pokemon.Base.Name } Fainted");
+                playerUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(2f);
+
+                var nextPokemon = playerParty.GetHealthyPokemon();
+                if (nextPokemon != null) {
+                    playerUnit.Setup(nextPokemon);
+                    playerHud.SetData(nextPokemon);
+
+                    dialogBox.SetMoves(nextPokemon.Moves);
+
+                    yield return dialogBox.TypeDialog($"Go { nextPokemon.Base.Name }!");
+
+                    PlayerAction();
+                } else {
+                    OnBattleOver(false);
+                }
             } else {
                 PlayerAction();
             }
@@ -105,7 +144,7 @@ namespace UI.Battle {
             }
         }
 
-        private void Update() {
+        public void HandleUpdate() {
             if (state == BattleState.PlayerAction) {
                 HandleActionSelection();
             } else if (state == BattleState.PlayerMove) {

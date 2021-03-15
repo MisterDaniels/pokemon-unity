@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster.Pokemon.Moves;
+using Monster.Creature.Moves;
 
-namespace Monster.Pokemon {
+namespace Monster.Creature {
 
     [CreateAssetMenu(fileName = "Pokémon", menuName = "Pokémon/Create", order = 0)]
 

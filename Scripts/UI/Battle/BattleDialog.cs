@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Monster.Pokemon.Moves;
+using Monster.Creature.Moves;
 
 namespace UI.Battle {
 
@@ -77,7 +77,7 @@ namespace UI.Battle {
                     }
 
                     if (movePPText) {
-                        movePPText.GetComponent<Text>().text = $"PP { moves[i].Base.PP.ToString() }/{ moves[i].Base.PP.ToString() }";
+                        movePPText.GetComponent<Text>().text = $"PP { moves[i].PP.ToString() }/{ moves[i].Base.PP.ToString() }";
                     }
 
                     if (moveTypeText) {
