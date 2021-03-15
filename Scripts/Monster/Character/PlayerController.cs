@@ -8,24 +8,18 @@ namespace Monster.Character {
 
     public class PlayerController : MonoBehaviour {
 
-        public float moveSpeed;
-        public LayerMask solidObjectsLayer;
-        public LayerMask interactableLayer;
-        public LayerMask longGrassLayer;
-
         public event Action OnEncountered;
 
-        private bool isMoving;
         private Vector2 input;
-        private CharacterAnimator animator;
+        private Character character;
 
         void Awake() {
-            animator = GetComponent<CharacterAnimator>();
+            character = GetComponent<Character>();
         }
 
         // Update is called once per frame
         public void HandleUpdate() {
-            if (!isMoving) {
+            if (!character.Animator.IsMoving) {
                 input.x = Input.GetAxisRaw("Horizontal");
                 input.y = Input.GetAxisRaw("Vertical");
 
@@ -33,16 +27,7 @@ namespace Monster.Character {
                 if (input.x != 0) input.y = 0;
 
                 if (input != Vector2.zero) {
-                    animator.MoveX = input.x;
-                    animator.MoveY = input.y;
-
-                    var targetPos = transform.position;
-                    targetPos.x += input.x;
-                    targetPos.y += input.y;
-
-                    if (IsWalkable(targetPos)) {
-                        StartCoroutine(Move(targetPos));
-                    }
+                    StartCoroutine(character.Move(input, CheckForEncounters));
                 }
             }
 
@@ -51,36 +36,8 @@ namespace Monster.Character {
             }
         }
 
-        IEnumerator Move(Vector3 targetPos) {
-            isMoving = true;
-            animator.IsMoving = isMoving;
-
-            while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon) {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, 
-                    moveSpeed * Time.deltaTime);
-                yield return null;
-            }
-
-            transform.position = targetPos;
-            isMoving = false;
-            animator.IsMoving = isMoving;
-
-            CheckForEncounters();
-        }
-
-        private bool IsWalkable(Vector3 targetPos) {
-            // Get center of the footer base
-            targetPos.y -= 0.5f;
-
-            if (Physics2D.OverlapCircle(targetPos, 0.01f, solidObjectsLayer | interactableLayer) != null) {
-                return false;
-            }
-
-            return true;
-        }
-
         private void CheckForEncounters() {
-            if (Physics2D.OverlapCircle(transform.position, 0.2f, longGrassLayer) != null) {
+            if (Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.LongGrassLayer) != null) {
                 if (UnityEngine.Random.Range(1, 101) <= 10) {
                     OnEncountered();
                 }
@@ -88,10 +45,10 @@ namespace Monster.Character {
         }
 
         private void Interact() {
-            var facingDir = new Vector3(animator.MoveX, animator.MoveY);
+            var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
             var interactPos = transform.position + facingDir;
 
-            var collider = Physics2D.OverlapCircle(interactPos, 0.1f, interactableLayer);
+            var collider = Physics2D.OverlapCircle(interactPos, 0.1f, GameLayers.i.InteractableLayer);
 
             if (collider != null) {
                 collider.GetComponent<Interactable>()?.Interact();
@@ -99,7 +56,7 @@ namespace Monster.Character {
         }
 
         private void OnDrawGizmosSelected() {
-            var facingDir = new Vector3(animator.MoveX, animator.MoveY);
+            var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
             var interactPos = transform.position + facingDir;
 
             Gizmos.color = Color.green;
