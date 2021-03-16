@@ -19,7 +19,7 @@ namespace Monster.Character {
         }
 
         public void HandleUpdate() {
-            if (!character.Animator.IsMoving) {
+            if (!character.IsMoving) {
                 input.x = Input.GetAxisRaw("Horizontal");
                 input.y = Input.GetAxisRaw("Vertical");
 
@@ -30,6 +30,8 @@ namespace Monster.Character {
                     StartCoroutine(character.Move(input, CheckForEncounters));
                 }
             }
+
+            character.HandleUpdate();
 
             if (Input.GetKeyDown(KeyCode.Z)) {
                 Interact();

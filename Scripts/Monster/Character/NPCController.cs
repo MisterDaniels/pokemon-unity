@@ -8,23 +8,52 @@ namespace Monster.Character {
 
     public class NPCController : MonoBehaviour, Interactable {
 
-        [SerializeField] List<Sprite> sprites;
+        [SerializeField] List<Vector2> movementPattern;
+        [SerializeField] float timeBetweenPattern;
 
-        SpriteAnimator spriteAnimator;
+        Character character;
+        NPCState state;
+        float idleTimer = 0f;
+        int currentPattern = 0;
 
-        private void Start() {
-            spriteAnimator = new SpriteAnimator(sprites, GetComponent<SpriteRenderer>());
-            spriteAnimator.Start();
+        private void Awake() {
+            character = GetComponent<Character>();
         }
 
         private void Update() {
-            spriteAnimator.HandleUpdate();
+            if (state == NPCState.Idle) {
+                idleTimer += Time.deltaTime;
+
+                if (idleTimer > timeBetweenPattern) {
+                    idleTimer = 0f;
+
+                    if (movementPattern.Count > 0) {
+                        StartCoroutine(Walk());
+                    }
+                }
+            }
+
+            character.HandleUpdate();
+        }
+
+        IEnummerator Walk() {
+            state = NPCState.Walking;
+
+            yield return character.Move(movementPattern[currentPattern]);
+            currentPattern = (currentPattern + 1) % movementPattern.Count;
+
+            state = NPCState.Idle;
         }
 
         public void Interact() {
-            Debug.Log("Intecating with NPC");
+            StartCoroutine(character.Move(new Vector2(0, 2)));
         }
 
+    }
+
+    public enum NPCState {
+        Idle,
+        Walking
     }
 
 }

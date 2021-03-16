@@ -14,6 +14,8 @@ namespace Monster.Character {
 
         private CharacterAnimator animator;
 
+        public bool IsMoving { get; private set; }
+
         public CharacterAnimator Animator {
             get => animator;
         }
@@ -23,8 +25,8 @@ namespace Monster.Character {
         }
 
         public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null) {
-            animator.MoveX = moveVec.x;
-            animator.MoveY = moveVec.y;
+            animator.MoveX = Mathf.Clamp(moveVec.x, -1f, 1f);
+            animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f);
 
             var targetPos = transform.position;
             targetPos.x += moveVec.x;
@@ -34,7 +36,7 @@ namespace Monster.Character {
                 yield break;
             }
 
-            animator.IsMoving = true;
+            IsMoving = true;
 
             while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon) {
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, 
@@ -43,9 +45,14 @@ namespace Monster.Character {
             }
 
             transform.position = targetPos;
-            animator.IsMoving = false;
+
+            IsMoving = false;
 
             OnMoveOver?.Invoke();
+        }
+
+        public void HandleUpdate() {
+            animator.IsMoving = IsMoving;
         }
 
         private bool IsWalkable(Vector3 targetPos) {
