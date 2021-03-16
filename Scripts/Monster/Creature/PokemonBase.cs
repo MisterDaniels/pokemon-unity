@@ -16,6 +16,7 @@ namespace Monster.Creature {
         [SerializeField] Sprite backSprite;
         [SerializeField] PokemonType mainType;
         [SerializeField] PokemonType subType;
+        [SerializeField] PokemonSize pokemonSize;
 
         // Base Stats
         [SerializeField] int maxHp;
@@ -51,6 +52,10 @@ namespace Monster.Creature {
             get { return subType; }
         }
 
+        public PokemonSize PokemonSize {
+            get { return pokemonSize; }
+        }
+
         public int MaxHp {
             get { return maxHp; }
         }
@@ -77,6 +82,22 @@ namespace Monster.Creature {
 
         public List<LearnableMove> LearnableMoves {
             get { return learnableMoves; }
+        }
+
+        public float GetPokemonSizeMultiplier() {
+            switch (pokemonSize) {
+                case PokemonSize.Small: {
+                    return 1f;
+                } case PokemonSize.Medium: {
+                    return 2f;
+                } case PokemonSize.Large: {
+                    return 3f;
+                } case PokemonSize.ExtraLarge: {
+                    return 4f;
+                } default: {
+                    return 1f;
+                }
+            }
         }
 
     }
@@ -117,6 +138,13 @@ namespace Monster.Creature {
         Dark,
         Steel,
         Fairy
+    }
+
+    public enum PokemonSize {
+        Small,
+        Medium,
+        Large,
+        ExtraLarge
     }
 
     public class TypeChart {

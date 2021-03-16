@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Core.Mechanic;
+using Map;
 
 namespace Monster.Character {
 
@@ -17,7 +18,6 @@ namespace Monster.Character {
             character = GetComponent<Character>();
         }
 
-        // Update is called once per frame
         public void HandleUpdate() {
             if (!character.Animator.IsMoving) {
                 input.x = Input.GetAxisRaw("Horizontal");

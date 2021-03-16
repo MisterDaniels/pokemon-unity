@@ -34,6 +34,9 @@ namespace UI.Battle {
                 image.sprite = Pokemon.Base.FrontSprite;
             }
 
+            var pokemonSize = Pokemon.Base.GetPokemonSizeMultiplier();
+            image.transform.localScale = new Vector3(pokemonSize, pokemonSize, 1f); 
+
             image.color = originalColor;
 
             PlayEnterAnimation();
