@@ -32,7 +32,7 @@ namespace Monster.Character {
             targetPos.x += moveVec.x;
             targetPos.y += moveVec.y;
 
-            if (!IsWalkable(targetPos)) {
+            if (!IsPathClear(targetPos)) {
                 yield break;
             }
 
@@ -55,6 +55,19 @@ namespace Monster.Character {
             animator.IsMoving = IsMoving;
         }
 
+        private bool IsPathClear(Vector3 targetPos) {
+            var diff = targetPos - transform.position;
+            var dir = diff.normalized;
+
+            if (Physics2D.BoxCast(transform.position + dir, new Vector2(0.2f, 0.2f), 0f, 
+                dir, diff.magnitude - 1.1f, GameLayers.i.SolidLayer | 
+                GameLayers.i.InteractableLayer | GameLayers.i.PlayerLayer) == true) {
+                return false;
+            }
+
+            return true;
+        }
+
         private bool IsWalkable(Vector3 targetPos) {
             // Get center of the footer base
             targetPos.y -= 0.5f;
@@ -65,6 +78,15 @@ namespace Monster.Character {
             }
 
             return true;
+        }
+
+        private void OnDrawGizmos() {
+            var targetPos = new Vector3(0f, -1f, 0f);
+            var diff = targetPos - transform.position;
+            var dir = diff.normalized;
+
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawCube(transform.position + dir, diff);
         }
 
     }

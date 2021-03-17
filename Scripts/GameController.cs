@@ -5,12 +5,14 @@ using Monster.Creature;
 using Monster.Character;
 using UI.Battle;
 using Map;
+using UI;
 
 namespace Core {
 
     public enum GameState {
         FreeRoam,
-        Battle
+        Battle,
+        Dialog
     }
 
     public class GameController : MonoBehaviour {
@@ -24,6 +26,16 @@ namespace Core {
         private void Start() {
             playerController.OnEncountered += StartBattle;
             battleSystem.OnBattleOver += EndBattle;
+
+            DialogManager.Instance.OnShowDialog += () => {
+                state = GameState.Dialog;
+            };
+
+            DialogManager.Instance.OnCloseDialog += () => {
+                if (state == GameState.Dialog) {
+                    state = GameState.FreeRoam;
+                }
+            };
         }
 
         private void StartBattle() {
@@ -48,6 +60,8 @@ namespace Core {
                 playerController.HandleUpdate();
             } else if (state == GameState.Battle) {
                 battleSystem.HandleUpdate();
+            } else if (state == GameState.Dialog) {
+                DialogManager.Instance.HandleUpdate();
             }
         }
     }
