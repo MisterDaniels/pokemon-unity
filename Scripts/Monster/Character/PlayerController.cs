@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core.Mechanic;
 using Map;
+using Monster.Creature;
+using Util;
 
-namespace Monster.Character {
+namespace Monster.Characters {
 
     public class PlayerController : MonoBehaviour {
 
@@ -13,9 +15,12 @@ namespace Monster.Character {
 
         private Vector2 input;
         private Character character;
+        private PokemonParty pokemonParty;
+        private Transform pokemonOverworld;
 
         void Awake() {
             character = GetComponent<Character>();
+            pokemonParty = GetComponent<PokemonParty>();
         }
 
         public void HandleUpdate() {
@@ -36,6 +41,10 @@ namespace Monster.Character {
             if (Input.GetKeyDown(KeyCode.Z)) {
                 Interact();
             }
+
+            if (Input.GetKeyDown(KeyCode.X)) {
+                ShowPokemon();
+            }
         }
 
         private void CheckForEncounters() {
@@ -53,16 +62,20 @@ namespace Monster.Character {
             var collider = Physics2D.OverlapCircle(interactPos, 0.1f, GameLayers.i.InteractableLayer);
 
             if (collider != null) {
-                collider.GetComponent<Interactable>()?.Interact();
+                collider.GetComponent<Interactable>()?.Interact(transform);
             }
         }
+        
+        private void ShowPokemon() {
+            var pokemon = pokemonParty.GetHealthyPokemon();
+            
+            if (!pokemonOverworld) {
+                pokemonOverworld = Instantiate(PrefabsReference.i.PokemonOverworld.transform, new Vector2(
+                    transform.position.x, transform.position.y + 1f), Quaternion.identity);
 
-        private void OnDrawGizmosSelected() {
-            var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
-            var interactPos = transform.position + facingDir;
-
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, interactPos);
+                var PokemonController = pokemonOverworld.GetComponent<PokemonController>();
+                PokemonController.Assign(this.gameObject);
+            }
         }
 
     }

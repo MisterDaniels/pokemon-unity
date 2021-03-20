@@ -6,9 +6,12 @@ using Core.Mechanic;
 using Util;
 using Map;
 
-namespace Monster.Character {
+namespace Monster.Characters {
 
     public class Character : MonoBehaviour {
+
+        public delegate void PlayerMoveCallback (Vector2 input);
+        public event PlayerMoveCallback OnMove;
 
         public float moveSpeed;
 
@@ -16,12 +19,16 @@ namespace Monster.Character {
 
         public bool IsMoving { get; private set; }
 
+        [SerializeField] public Rect Box;
+
         public CharacterAnimator Animator {
             get => animator;
         }
 
         private void Awake() {
             animator = GetComponent<CharacterAnimator>();
+            Debug.Log(GetComponent<BoxCollider2D>().transform.position);
+            Debug.Log(transform.position);
         }
 
         public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null) {
@@ -49,18 +56,32 @@ namespace Monster.Character {
             IsMoving = false;
 
             OnMoveOver?.Invoke();
+            OnMove?.Invoke(moveVec);
         }
 
         public void HandleUpdate() {
             animator.IsMoving = IsMoving;
         }
 
+        public void LookTowards(Vector3 targetPos) {
+            var xDiff = Mathf.Floor(targetPos.x) - Mathf.Floor(transform.position.x);
+            var yDiff = Mathf.Floor(targetPos.y) - Mathf.Floor(transform.position.y);
+
+            if (xDiff == 0 || yDiff == 0) {
+                animator.MoveX = Mathf.Clamp(xDiff, -1f, 1f);
+                animator.MoveY = Mathf.Clamp(yDiff, -1f, 1f);
+            } else {
+                Debug.LogError("Error in Look Towards: You can't ask the character to look diagonally");
+            }
+        }
+
         private bool IsPathClear(Vector3 targetPos) {
             var diff = targetPos - transform.position;
             var dir = diff.normalized;
+            var collOffset = GetComponent<BoxCollider2D>().offset;
 
-            if (Physics2D.BoxCast(transform.position + dir, new Vector2(0.2f, 0.2f), 0f, 
-                dir, diff.magnitude - 1.1f, GameLayers.i.SolidLayer | 
+            if (Physics2D.BoxCast(transform.position + dir + (Vector3) collOffset, new Vector2(0.2f, 0.2f), 0f, 
+                dir, diff.magnitude - 1f, GameLayers.i.SolidLayer | 
                 GameLayers.i.InteractableLayer | GameLayers.i.PlayerLayer) == true) {
                 return false;
             }
@@ -81,12 +102,11 @@ namespace Monster.Character {
         }
 
         private void OnDrawGizmos() {
-            var targetPos = new Vector3(0f, -1f, 0f);
-            var diff = targetPos - transform.position;
-            var dir = diff.normalized;
+            var fw = transform.TransformDirection(Box.position);
 
             Gizmos.color = Color.magenta;
-            Gizmos.DrawCube(transform.position + dir, diff);
+            Gizmos.matrix = Matrix4x4.TRS(transform.position + fw, transform.rotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector2.zero, Box.size);
         }
 
     }

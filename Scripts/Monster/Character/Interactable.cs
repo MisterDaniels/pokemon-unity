@@ -6,7 +6,7 @@ namespace Core.Mechanic {
 
     public interface Interactable {
 
-        void Interact();
+        void Interact(Transform initiator);
 
     }
 

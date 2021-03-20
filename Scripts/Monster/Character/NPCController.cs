@@ -5,7 +5,7 @@ using Core.Mechanic;
 using Util;
 using UI;
 
-namespace Monster.Character {
+namespace Monster.Characters {
 
     public class NPCController : MonoBehaviour, Interactable {
 
@@ -41,15 +41,23 @@ namespace Monster.Character {
         IEnumerator Walk() {
             state = NPCState.Walking;
 
+            var oldPos = transform.position;
+
             yield return character.Move(movementPattern[currentPattern]);
-            currentPattern = (currentPattern + 1) % movementPattern.Count;
+            
+            if (transform.position != oldPos) {
+                currentPattern = (currentPattern + 1) % movementPattern.Count;
+            }
 
             state = NPCState.Idle;
         }
 
-        public void Interact() {
+        public void Interact(Transform initiator) {
             if (state == NPCState.Idle) {
                 state = NPCState.Dialog;
+
+                character.LookTowards(initiator.position);
+
                 StartCoroutine(DialogManager.Instance.ShowDialog(dialog, () => {
                     idleTimer = 0f;
                     state = NPCState.Idle;

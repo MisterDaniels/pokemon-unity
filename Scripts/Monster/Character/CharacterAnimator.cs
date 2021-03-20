@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
-namespace Monster.Character {
+namespace Monster.Characters {
 
     public class CharacterAnimator : MonoBehaviour {
 

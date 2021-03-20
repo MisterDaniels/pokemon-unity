@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Monster.Creature;
-using Monster.Character;
+using Monster.Characters;
 using UI.Battle;
 using Map;
 using UI;

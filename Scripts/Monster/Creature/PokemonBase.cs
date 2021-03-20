@@ -14,6 +14,12 @@ namespace Monster.Creature {
         [SerializeField] string description;
         [SerializeField] Sprite frontSprite;
         [SerializeField] Sprite backSprite;
+
+        [SerializeField] List<Sprite> walkDownSprites;
+        [SerializeField] List<Sprite> walkUpSprites;
+        [SerializeField] List<Sprite> walkRightSprites;
+        [SerializeField] List<Sprite> walkLeftSprites;
+
         [SerializeField] PokemonType mainType;
         [SerializeField] PokemonType subType;
         [SerializeField] PokemonSize pokemonSize;
@@ -82,6 +88,22 @@ namespace Monster.Creature {
 
         public List<LearnableMove> LearnableMoves {
             get { return learnableMoves; }
+        }
+
+        public List<Sprite> WalkDownSprites {
+            get { return walkDownSprites; }
+        }
+
+        public List<Sprite> WalkUpSprites {
+            get { return walkUpSprites; }
+        }
+
+        public List<Sprite> WalkRightSprites {
+            get { return walkRightSprites; }
+        }
+
+        public List<Sprite> WalkLeftSprites {
+            get { return walkLeftSprites; }
         }
 
         public float GetPokemonSizeMultiplier() {
