@@ -8,15 +8,20 @@ namespace Util {
     public class PrefabsReference : MonoBehaviour {
         
         [SerializeField] GameObject pokemonOverworld;
+        [SerializeField] GameObject itemOverworld;
 
-        public static PrefabsReference i { get; set; }
+        public static PrefabsReference Instance { get; set; }
 
         private void Awake() {
-            i = this;
+            Instance = this;
         }
 
         public GameObject PokemonOverworld {
             get => pokemonOverworld;
+        }
+
+        public GameObject ItemOverworld {
+            get => itemOverworld;
         }
 
     }

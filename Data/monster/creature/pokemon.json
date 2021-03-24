@@ -1,0 +1,36 @@
+[
+    {
+        "id": 1,
+        "name": "Bulbasaur",
+        "description": "Bulbasaur is a Grass/Poison type Pokémon introduced in Generation 1. It is known as the Seed Pokémon.",
+        "mainType": 5,
+        "subType": 8,
+        "pokemonSize": 0,
+        "maxHp": 45,
+        "attack": 49,
+        "defence": 49,
+        "speed": 45,
+        "spAttack": 65,
+        "spDefence": 65,
+        "learnableMoves": [
+            1, 2, 3
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Charmander",
+        "description": "Bulbasaur is a Grass/Poison type Pokémon introduced in Generation 1. It is known as the Seed Pokémon.",
+        "mainType": 5,
+        "subType": 8,
+        "pokemonSize": 0,
+        "maxHp": 45,
+        "attack": 49,
+        "defence": 49,
+        "speed": 45,
+        "spAttack": 65,
+        "spDefence": 65,
+        "learnableMoves": [
+            1, 2, 3
+        ]
+    }
+]

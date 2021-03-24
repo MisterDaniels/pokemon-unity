@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Core;
 
 namespace Monster.Creature {
     
@@ -17,6 +18,14 @@ namespace Monster.Creature {
 
         public Pokemon GetHealthyPokemon() {
             return pokemons.Where(pokemon => pokemon.HP > 0).FirstOrDefault();
+        }
+
+        public void Load() {
+            //this = GameAssets.i.LoadPokemonParty(0);
+        }
+
+        public void Save() {
+            //GameAssets.i.Save();
         }
 
     }

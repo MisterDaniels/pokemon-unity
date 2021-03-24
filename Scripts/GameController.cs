@@ -6,13 +6,15 @@ using Monster.Characters;
 using UI.Battle;
 using Map;
 using UI;
+using UI.Menus;
 
 namespace Core {
 
     public enum GameState {
         FreeRoam,
         Battle,
-        Dialog
+        Dialog,
+        Menu
     }
 
     public class GameController : MonoBehaviour {

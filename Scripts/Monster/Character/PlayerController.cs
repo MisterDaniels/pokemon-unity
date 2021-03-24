@@ -6,6 +6,9 @@ using Core.Mechanic;
 using Map;
 using Monster.Creature;
 using Util;
+using UI.Menus;
+using Items;
+using Core;
 
 namespace Monster.Characters {
 
@@ -17,10 +20,14 @@ namespace Monster.Characters {
         private Character character;
         private PokemonParty pokemonParty;
         private Transform pokemonOverworld;
+        private Inventory inventory;
+
+        [SerializeField] Item item;
 
         void Awake() {
             character = GetComponent<Character>();
             pokemonParty = GetComponent<PokemonParty>();
+            inventory = GetComponent<Inventory>();
         }
 
         public void HandleUpdate() {
@@ -45,6 +52,18 @@ namespace Monster.Characters {
             if (Input.GetKeyDown(KeyCode.X)) {
                 ShowPokemon();
             }
+
+            if (Input.GetKeyDown(KeyCode.I)) {
+                //SpawnManager.Instance.SpawnItemInWorld(item, 
+                //    new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f));
+
+                if (!MenuManager.Instance.CheckIfMenuIsOpened(MenuType.Inventory)) {
+                    MenuManager.Instance.ApplyMenuTo(inventory);
+                    MenuManager.Instance.ShowMenu(MenuType.Inventory);
+                } else {
+                    MenuManager.Instance.HideMenu(MenuType.Inventory);
+                }
+            }
         }
 
         private void CheckForEncounters() {
@@ -59,10 +78,20 @@ namespace Monster.Characters {
             var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
             var interactPos = transform.position + facingDir;
 
-            var collider = Physics2D.OverlapCircle(interactPos, 0.1f, GameLayers.i.InteractableLayer);
+            var collider = Physics2D.OverlapCircle(interactPos, 0.1f, GameLayers.i.InteractableLayer |
+                GameLayers.i.ItemWorldLayer);
 
             if (collider != null) {
                 collider.GetComponent<Interactable>()?.Interact(transform);
+                
+                ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+
+                Debug.Log(collider);
+
+                if (itemWorld) {
+                    inventory.AddItem(itemWorld.Item);
+                    itemWorld.DestroySelf();
+                }
             }
         }
         
@@ -70,7 +99,7 @@ namespace Monster.Characters {
             var pokemon = pokemonParty.GetHealthyPokemon();
             
             if (!pokemonOverworld) {
-                pokemonOverworld = Instantiate(PrefabsReference.i.PokemonOverworld.transform, new Vector2(
+                pokemonOverworld = Instantiate(PrefabsReference.Instance.PokemonOverworld.transform, new Vector2(
                     transform.position.x, transform.position.y + 1f), Quaternion.identity);
 
                 var PokemonController = pokemonOverworld.GetComponent<PokemonController>();
