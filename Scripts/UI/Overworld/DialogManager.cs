@@ -6,28 +6,37 @@ using UnityEngine.UI;
 using Core.Mechanic;
 
 namespace UI {
+
     public class DialogManager : MonoBehaviour {
 
         [SerializeField] GameObject dialogBox;
         [SerializeField] Text dialogText;
         [SerializeField] int lettersPerSecond;
+        [SerializeField] GameObject confirmationBox;
+        [SerializeField] List<Text> answerTexts;
+        [SerializeField] Color hightlightedColor;
 
         public event Action OnShowDialog;
         public event Action OnCloseDialog;
 
         public static DialogManager Instance { get; private set; }
         public bool IsShowing { get; private set; }
+        public bool IsAnswering { get; private set; }
+        public Color HightlightedColor { 
+            get { return hightlightedColor; } 
+        }
 
         Dialog dialog;
         int currentLine = 0;
         bool isTyping;
-        Action onDialogFinished;
+        Action<bool> onDialogFinished;
+        int currentAnswer = 0;
         
         private void Awake() {
             Instance = this;
         }
 
-        public IEnumerator ShowDialog(Dialog dialog, Action onFinished = null) {
+        public IEnumerator ShowDialog(Dialog dialog, Action<bool> onFinished = null) {
             yield return new WaitForEndOfFrame();
 
             OnShowDialog?.Invoke();
@@ -41,16 +50,42 @@ namespace UI {
         }
 
         public void HandleUpdate() {
-            if (Input.GetKeyDown(KeyCode.Z) && !isTyping) {
+            if (IsAnswering) {
+                if (Input.GetKeyDown(KeyCode.Z)) {
+                    IsAnswering = false;
+                    confirmationBox.SetActive(false);
+                }
+
+                if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                    if (currentAnswer < 1) {
+                        ++currentAnswer;
+                    }
+                } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+                    if (currentAnswer > 0) {
+                        --currentAnswer;
+                    }
+                }
+
+                UpdateAnswerSelection(currentAnswer);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z) && !isTyping && !IsAnswering) {
                 ++currentLine;
                 if (currentLine < dialog.Lines.Count) {
+                    switch(dialog.Lines[currentLine]) {
+                        case "?":
+                            confirmationBox.SetActive(true);
+                            IsAnswering = true;
+                            return;
+                    }
+
                     StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
                 } else {
                     currentLine = 0;
                     
                     IsShowing = false;
                     dialogBox.SetActive(false);
-                    onDialogFinished?.Invoke();
+                    onDialogFinished?.Invoke(currentAnswer > 0 ? true : false);
                     OnCloseDialog?.Invoke();
                 }
             }
@@ -66,6 +101,16 @@ namespace UI {
             }
 
             isTyping = false;
+        }
+
+        private void UpdateAnswerSelection(int currentAnswer) {
+            for (int i = 0; i < answerTexts.Count; i++) {
+                if (i == currentAnswer) {
+                    answerTexts[i].color = hightlightedColor;
+                } else {
+                    answerTexts[i].color = Color.black;
+                }
+            }
         }
 
     }

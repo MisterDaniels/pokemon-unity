@@ -14,6 +14,7 @@ namespace Monster.Creature {
         [SerializeField] string description;
         [SerializeField] Sprite frontSprite;
         [SerializeField] Sprite backSprite;
+        [SerializeField] Sprite iconSprite;
 
         [SerializeField] List<Sprite> walkDownSprites;
         [SerializeField] List<Sprite> walkUpSprites;
@@ -48,6 +49,10 @@ namespace Monster.Creature {
 
         public Sprite BackSprite {
             get { return backSprite; }
+        }
+
+        public Sprite IconSprite {
+            get { return iconSprite; }
         }
 
         public PokemonType MainType {

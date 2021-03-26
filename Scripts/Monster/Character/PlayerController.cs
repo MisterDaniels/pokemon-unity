@@ -22,8 +22,6 @@ namespace Monster.Characters {
         private Transform pokemonOverworld;
         private Inventory inventory;
 
-        [SerializeField] Item item;
-
         void Awake() {
             character = GetComponent<Character>();
             pokemonParty = GetComponent<PokemonParty>();
@@ -79,20 +77,9 @@ namespace Monster.Characters {
             var interactPos = transform.position + facingDir;
 
             var collider = Physics2D.OverlapCircle(interactPos, 0.1f, GameLayers.i.InteractableLayer |
-                GameLayers.i.ItemWorldLayer);
+                GameLayers.i.ItemWorldLayer | GameLayers.i.PokemonLayer);
 
-            if (collider != null) {
-                collider.GetComponent<Interactable>()?.Interact(transform);
-                
-                ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-
-                Debug.Log(collider);
-
-                if (itemWorld) {
-                    inventory.AddItem(itemWorld.Item);
-                    itemWorld.DestroySelf();
-                }
-            }
+            collider.GetComponent<Interactable>()?.Interact(transform);
         }
         
         private void ShowPokemon() {

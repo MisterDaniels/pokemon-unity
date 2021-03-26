@@ -58,7 +58,7 @@ namespace Monster.Characters {
 
                 character.LookTowards(initiator.position);
 
-                StartCoroutine(DialogManager.Instance.ShowDialog(dialog, () => {
+                StartCoroutine(DialogManager.Instance.ShowDialog(dialog, (bool action) => {
                     idleTimer = 0f;
                     state = NPCState.Idle;
                 }));

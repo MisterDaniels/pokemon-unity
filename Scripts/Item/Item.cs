@@ -22,6 +22,10 @@ namespace Items {
             set { amount = value; }
         }
 
+        public void Use() {
+            _base.Use();
+        }
+
     }
 
 }

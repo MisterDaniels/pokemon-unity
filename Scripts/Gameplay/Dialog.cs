@@ -11,6 +11,7 @@ namespace Core.Mechanic {
 
         public List<string> Lines {
             get { return lines; }
+            set { lines = value; }
         }
 
     }

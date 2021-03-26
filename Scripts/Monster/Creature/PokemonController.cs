@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Monster.Characters;
+using Core.Mechanic;
+using UI;
 
 namespace Monster.Creature {
 
-    public class PokemonController : MonoBehaviour {
+    public class PokemonController : MonoBehaviour, Interactable {
     
         Character character;
         PokemonState state;
@@ -46,6 +48,22 @@ namespace Monster.Creature {
             state = PokemonState.Idle;
         }
 
+        public void Interact(Transform initiator) {
+            if (state == PokemonState.Idle) {
+                state = PokemonState.Interaction;
+
+                character.LookTowards(initiator.position);
+
+                Dialog dialog = new Dialog();
+                dialog.Lines = new List<string>(new string[] { "Eiiiii" });
+
+                StartCoroutine(DialogManager.Instance.ShowDialog(dialog, (bool action) => {
+                    idleTimer = 0f;
+                    state = PokemonState.Idle;
+                }));
+            }
+        }
+
         public void Assign(GameObject owner) {
             var character = owner.GetComponent<Character>();
 
@@ -64,7 +82,8 @@ namespace Monster.Creature {
 
     public enum PokemonState {
         Idle,
-        Walking
+        Walking,
+        Interaction
     }
 
 }

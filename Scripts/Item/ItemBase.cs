@@ -4,16 +4,28 @@ using UnityEngine;
 
 namespace Items {
 
-    [CreateAssetMenu(fileName = "Item", menuName = "Item/Create", order = 0)]
+    public enum ItemType {
+        Berry,
+        Potion,
+        Coin,
+        Catch,
+        Addon,
+        Pokemon
+    }
 
-    public class ItemBase : ScriptableObject {
+    public enum RarenessType {
+        Common,
+        Rare,
+        Unique
+    }
+
+    public abstract class ItemBase : ScriptableObject {
 
         [SerializeField] string name;
         [TextArea]
         [SerializeField] string description;
         [SerializeField] Sprite sprite;
 
-        [SerializeField] ItemType itemType;
         [SerializeField] RarenessType rarenessType;
 
         public string Name {
@@ -26,11 +38,10 @@ namespace Items {
 
         public Sprite Sprite {
             get { return sprite; }
+            set { sprite = value; }
         }
 
-        public ItemType ItemType {
-            get { return ItemType; }
-        }
+        public abstract ItemType GetType();
 
         public RarenessType RarenessType {
             get { return rarenessType; }
@@ -51,32 +62,23 @@ namespace Items {
         }
 
         public bool IsStackable() {
-            switch (itemType) {
+            switch (GetType()) {
                 case ItemType.Berry:
                 case ItemType.Potion:
                 case ItemType.Coin:
                 case ItemType.Catch:
                     return true;
                 case ItemType.Addon:
+                case ItemType.Pokemon:
                 default:
                     return false;
             }
         }
 
-    }
+        public virtual void Use() {
+            Debug.Log("Item was used");
+        }
 
-    public enum ItemType {
-        Berry,
-        Potion,
-        Coin,
-        Catch,
-        Addon
-    }
-
-    public enum RarenessType {
-        Common,
-        Rare,
-        Unique
     }
 
 }

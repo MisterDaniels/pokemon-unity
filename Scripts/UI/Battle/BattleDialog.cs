@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Monster.Creature.Moves;
+using UI;
 
 namespace UI.Battle {
 
     public class BattleDialog : MonoBehaviour {
 
         [SerializeField] int lettersPerSecond = 30;
-        [SerializeField] Color hightlightedColor;
 
         [SerializeField] Text dialogText;
         [SerializeField] GameObject actionSelector;
@@ -48,7 +48,7 @@ namespace UI.Battle {
         public void UpdateActionSelection(int selectedAction) {
             for (int i = 0; i < actionTexts.Count; i++) {
                 if (i == selectedAction) {
-                    actionTexts[i].color = hightlightedColor;
+                    actionTexts[i].color = DialogManager.Instance.HightlightedColor;
                 } else {
                     actionTexts[i].color = Color.black;
                 }
@@ -58,7 +58,7 @@ namespace UI.Battle {
         public void UpdateMoveSelection(int selectedMove) {
             for (int i = 0; i < moveObjects.Count; i++) {
                 if (i == selectedMove) {
-                    moveObjects[i].GetComponent<Image>().color = hightlightedColor;
+                    moveObjects[i].GetComponent<Image>().color = DialogManager.Instance.HightlightedColor;
                 } else {
                     moveObjects[i].GetComponent<Image>().color = Color.white;
                 }

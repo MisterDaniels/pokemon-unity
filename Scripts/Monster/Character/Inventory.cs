@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Items;
+using Monster.Creature;
 
 namespace Monster.Characters {
 
@@ -23,6 +24,25 @@ namespace Monster.Characters {
         }
 
         public void AddItem(Item item) {
+            switch(item.Base.GetType()) {
+                case ItemType.Pokemon:
+                    PokemonParty pokemonParty = GetComponent<PokemonParty>();
+                    
+                    if (pokemonParty == null) {
+                        return;
+                    }
+
+                    if (!pokemonParty.IsPartyComplete()) {
+                        pokemonParty.AddPokemon(((Pokeball) item.Base).Pokemon);
+                        item.Base.Sprite = ((Pokeball) item.Base).Pokemon.Base.IconSprite;
+                    }
+
+                    break;
+                default:
+                    Debug.Log("table");
+                    break;
+            }
+
             if (item.Base.IsStackable()) {
                 bool itemAlreadyInInventory = false;
 
@@ -41,6 +61,10 @@ namespace Monster.Characters {
             }
 
             OnItemListChanged?.Invoke();
+        }
+
+        public void RemoveItem() {
+
         }
 
     }

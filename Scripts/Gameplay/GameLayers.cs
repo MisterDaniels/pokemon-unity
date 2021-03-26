@@ -12,6 +12,7 @@ namespace Map {
         [SerializeField] LayerMask longGrassLayer;
         [SerializeField] LayerMask playerLayer;
         [SerializeField] LayerMask itemWorldLayer;
+        [SerializeField] LayerMask pokemonLayer;
 
         public static GameLayers i { get; set; }
 
@@ -37,6 +38,10 @@ namespace Map {
 
         public LayerMask ItemWorldLayer {
             get => itemWorldLayer;
+        }
+
+        public LayerMask PokemonLayer {
+            get => pokemonLayer;
         }
 
     }
