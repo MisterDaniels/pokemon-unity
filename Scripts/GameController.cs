@@ -38,6 +38,16 @@ namespace Core {
                     state = GameState.FreeRoam;
                 }
             };
+
+            MenuManager.Instance.OnShowMenu += () => {
+                state = GameState.Menu;
+            };
+
+            MenuManager.Instance.OnCloseMenu += () => {
+                if (state == GameState.Menu) {
+                    state = GameState.FreeRoam;
+                }
+            };
         }
 
         private void StartBattle() {
@@ -64,6 +74,8 @@ namespace Core {
                 battleSystem.HandleUpdate();
             } else if (state == GameState.Dialog) {
                 DialogManager.Instance.HandleUpdate();
+            } else if (state == GameState.Menu) {
+                MenuManager.Instance.HandleUpdate();
             }
         }
     }

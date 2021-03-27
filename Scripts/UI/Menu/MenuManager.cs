@@ -26,6 +26,23 @@ namespace UI.Menus {
             Instance = this;
         }
 
+        public void HandleUpdate() {
+            switch(showingMenus[showingMenus.Count - 1]) {
+                case MenuType.Inventory:
+                    if (Input.GetKeyDown(KeyCode.I)) {
+                        HideMenu(MenuType.Inventory);
+                        return;
+                    }
+
+                    inventoryHud.HandleUpdate();
+
+                    break;
+                default:
+                    Debug.Log("Menu not support");
+                    break;
+            }
+        }
+
         public void ApplyMenuTo(Inventory inventory) {
             inventoryHud.SetInventory(inventory);
         }
@@ -51,6 +68,8 @@ namespace UI.Menus {
             if (!CheckIfMenuIsOpened(menuType)) {
                 return;
             }
+
+            showingMenus.Remove(menuType);
             
             if (showingMenus.Count <= 0) {
                 IsShowingAMenu = false;
@@ -61,8 +80,6 @@ namespace UI.Menus {
                 Transform inventoryContainer = inventoryHud.gameObject.transform.Find("Inventory");
                 inventoryContainer.gameObject.SetActive(false);
             }
-            
-            showingMenus.Remove(menuType);
         }
 
         public void ShowAllMenu() {

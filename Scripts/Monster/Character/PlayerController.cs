@@ -52,9 +52,6 @@ namespace Monster.Characters {
             }
 
             if (Input.GetKeyDown(KeyCode.I)) {
-                //SpawnManager.Instance.SpawnItemInWorld(item, 
-                //    new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f));
-
                 if (!MenuManager.Instance.CheckIfMenuIsOpened(MenuType.Inventory)) {
                     MenuManager.Instance.ApplyMenuTo(inventory);
                     MenuManager.Instance.ShowMenu(MenuType.Inventory);
