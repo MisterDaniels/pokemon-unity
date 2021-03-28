@@ -14,7 +14,8 @@ namespace Core {
         FreeRoam,
         Battle,
         Dialog,
-        Menu
+        Menu,
+        Paused
     }
 
     public class GameController : MonoBehaviour {
@@ -26,6 +27,7 @@ namespace Core {
         public static GameController Instance { get; private set; }
 
         GameState state;
+        GameState stateBeforePause;
 
         private void Awake() {
             Instance = this;
@@ -53,6 +55,15 @@ namespace Core {
                     state = GameState.FreeRoam;
                 }
             };
+        }
+
+        public void PauseGame(bool pause) {
+            if (pause) {
+                stateBeforePause = state;
+                state = GameState.Paused;
+            } else {
+                state = stateBeforePause;
+            }
         }
 
         public void StartBattle() {

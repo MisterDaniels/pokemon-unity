@@ -14,8 +14,6 @@ namespace Monster.Characters {
 
     public class PlayerController : MonoBehaviour {
 
-        [SerializeField] float offsetY = 0.5f;
-
         public event Action OnEncountered;
 
         private Vector2 input;
@@ -23,6 +21,8 @@ namespace Monster.Characters {
         private PokemonParty pokemonParty;
         private Transform pokemonOverworld;
         private Inventory inventory;
+
+        public Character Character => character;
 
         void Awake() {
             character = GetComponent<Character>();
@@ -64,7 +64,7 @@ namespace Monster.Characters {
         }
 
         private void OnMoveOver() {
-            var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, offsetY), 0.2f, GameLayers.i.TriggerableLayers);
+            var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, character.OffsetY), 0.2f, GameLayers.i.TriggerableLayers);
 
             foreach(var collider in colliders) {
                 var triggerable = collider.GetComponent<IPlayerTriggerable>();
