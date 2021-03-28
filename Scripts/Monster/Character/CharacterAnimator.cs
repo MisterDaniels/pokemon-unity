@@ -12,6 +12,30 @@ namespace Monster.Characters {
         [SerializeField] List<Sprite> walkRightSprites;
         [SerializeField] List<Sprite> walkLeftSprites;
 
+        public List<Sprite> WalkDownSprites { 
+            set {
+                walkDownSprites = value;
+            }
+        }
+        
+        public List<Sprite> WalkUpSprites { 
+            set {
+                walkUpSprites = value;
+            }
+        }
+
+        public List<Sprite> WalkRightSprites { 
+            set {
+                walkRightSprites = value;
+            }
+        }
+
+        public List<Sprite> WalkLeftSprites { 
+            set {
+                walkLeftSprites = value;
+            }
+        }
+
         // Parameters
         public float MoveX { get; set; }
         public float MoveY { get; set; }

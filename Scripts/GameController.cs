@@ -22,11 +22,16 @@ namespace Core {
         [SerializeField] PlayerController playerController;
         [SerializeField] BattleSystem battleSystem;
         [SerializeField] Camera worldCamera;
+        
+        public static GameController Instance { get; private set; }
 
         GameState state;
 
+        private void Awake() {
+            Instance = this;
+        }
+
         private void Start() {
-            playerController.OnEncountered += StartBattle;
             battleSystem.OnBattleOver += EndBattle;
 
             DialogManager.Instance.OnShowDialog += () => {
@@ -50,7 +55,7 @@ namespace Core {
             };
         }
 
-        private void StartBattle() {
+        public void StartBattle() {
             state = GameState.Battle;
             battleSystem.gameObject.SetActive(true);
             worldCamera.gameObject.SetActive(false);

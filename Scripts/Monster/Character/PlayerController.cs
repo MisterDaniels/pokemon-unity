@@ -14,6 +14,8 @@ namespace Monster.Characters {
 
     public class PlayerController : MonoBehaviour {
 
+        [SerializeField] float offsetY = 0.5f;
+
         public event Action OnEncountered;
 
         private Vector2 input;
@@ -37,7 +39,7 @@ namespace Monster.Characters {
                 if (input.x != 0) input.y = 0;
 
                 if (input != Vector2.zero) {
-                    StartCoroutine(character.Move(input, CheckForEncounters));
+                    StartCoroutine(character.Move(input, OnMoveOver));
                 }
             }
 
@@ -61,10 +63,15 @@ namespace Monster.Characters {
             }
         }
 
-        private void CheckForEncounters() {
-            if (Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.LongGrassLayer) != null) {
-                if (UnityEngine.Random.Range(1, 101) <= 10) {
-                    OnEncountered();
+        private void OnMoveOver() {
+            var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, offsetY), 0.2f, GameLayers.i.TriggerableLayers);
+
+            foreach(var collider in colliders) {
+                var triggerable = collider.GetComponent<IPlayerTriggerable>();
+
+                if (triggerable != null) {
+                    triggerable.OnPlayerTriggered(this);
+                    break;
                 }
             }
         }

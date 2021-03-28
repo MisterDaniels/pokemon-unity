@@ -11,6 +11,7 @@ namespace Monster.Creature {
     
         Character character;
         PokemonState state;
+        GameObject owner;
 
         List<Vector2> movementPattern = new List<Vector2>();
 
@@ -45,6 +46,8 @@ namespace Monster.Creature {
             yield return character.Move(movementPattern[0]);
             movementPattern.RemoveAt(0);
 
+            character.LookTowards(owner.transform.position);
+
             state = PokemonState.Idle;
         }
 
@@ -65,12 +68,24 @@ namespace Monster.Creature {
         }
 
         public void Assign(GameObject owner) {
-            var character = owner.GetComponent<Character>();
+            this.owner = owner;
+            var ownerCharacter = owner.GetComponent<Character>();
 
-            character.OnMove += (Vector2 input) => {
+            var characterAnimator = GetComponent<CharacterAnimator>();
+            var pokemonParty = owner.GetComponent<PokemonParty>();
+            var pokemon = pokemonParty.GetHealthyPokemon();
+
+            characterAnimator.WalkDownSprites = pokemon.Base.WalkDownSprites;
+            characterAnimator.WalkUpSprites = pokemon.Base.WalkUpSprites;
+            characterAnimator.WalkRightSprites = pokemon.Base.WalkRightSprites;
+            characterAnimator.WalkLeftSprites = pokemon.Base.WalkLeftSprites;
+
+            ownerCharacter.OnMove += (Vector2 input) => {
                 if ((input.x != 0 && lastMovementPattern.y != 0) ||
                     (input.y != 0 && lastMovementPattern.x != 0)) {
                     movementPattern.Add(lastMovementPattern);
+                    lastMovementPattern = input;
+                    return;
                 }
 
                 lastMovementPattern = input;

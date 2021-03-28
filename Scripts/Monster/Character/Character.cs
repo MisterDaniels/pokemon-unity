@@ -27,8 +27,6 @@ namespace Monster.Characters {
 
         private void Awake() {
             animator = GetComponent<CharacterAnimator>();
-            Debug.Log(GetComponent<BoxCollider2D>().transform.position);
-            Debug.Log(transform.position);
         }
 
         public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null) {
@@ -57,6 +55,10 @@ namespace Monster.Characters {
 
             OnMoveOver?.Invoke();
             OnMove?.Invoke(moveVec);
+        }
+
+        public IEnumerator MoveTo(Vector2 movePos) {
+            yield return null;
         }
 
         public void HandleUpdate() {
