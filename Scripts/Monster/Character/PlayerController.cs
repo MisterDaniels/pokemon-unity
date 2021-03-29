@@ -9,6 +9,7 @@ using Util;
 using UI.Menus;
 using Items;
 using Core;
+using Core.Admin;
 
 namespace Monster.Characters {
 
@@ -60,6 +61,10 @@ namespace Monster.Characters {
                 } else {
                     MenuManager.Instance.HideMenu(MenuType.Inventory);
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Quote)) {
+                GameController.Instance.ToggleConsole();
             }
         }
 

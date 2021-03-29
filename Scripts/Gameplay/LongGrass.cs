@@ -10,8 +10,6 @@ namespace Map {
     public class LongGrass : MonoBehaviour, IPlayerTriggerable {
         
         public void OnPlayerTriggered(PlayerController player) {
-            Debug.Log("Player entered Grass");
-
             if (UnityEngine.Random.Range(1, 101) <= 10) {
                 GameController.Instance.StartBattle();
             }

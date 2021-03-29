@@ -35,7 +35,6 @@ namespace Monster.Characters {
 
                     break;
                 default:
-                    Debug.Log("table");
                     break;
             }
 

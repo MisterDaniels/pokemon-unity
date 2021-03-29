@@ -7,6 +7,7 @@ using UI.Battle;
 using Map;
 using UI;
 using UI.Menus;
+using Core.Admin;
 
 namespace Core {
 
@@ -15,7 +16,8 @@ namespace Core {
         Battle,
         Dialog,
         Menu,
-        Paused
+        Paused,
+        Debug
     }
 
     public class GameController : MonoBehaviour {
@@ -27,7 +29,9 @@ namespace Core {
         public static GameController Instance { get; private set; }
 
         GameState state;
-        GameState stateBeforePause;
+        GameState stateBefore;
+
+        public PlayerController PlayerController => playerController;
 
         private void Awake() {
             Instance = this;
@@ -59,10 +63,21 @@ namespace Core {
 
         public void PauseGame(bool pause) {
             if (pause) {
-                stateBeforePause = state;
+                stateBefore = state;
                 state = GameState.Paused;
             } else {
-                state = stateBeforePause;
+                state = stateBefore;
+            }
+        }
+
+        public void ToggleConsole() {
+            DebugManager.Instance.ToggleConsole();
+
+            if (state != GameState.Debug) {
+                stateBefore = state;
+                state = GameState.Debug;
+            } else {
+                state = stateBefore;
             }
         }
 
@@ -92,6 +107,8 @@ namespace Core {
                 DialogManager.Instance.HandleUpdate();
             } else if (state == GameState.Menu) {
                 MenuManager.Instance.HandleUpdate();
+            } else if (state == GameState.Debug) {
+                DebugManager.Instance.HandleUpdate();
             }
         }
     }

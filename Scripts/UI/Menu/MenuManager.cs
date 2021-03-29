@@ -107,7 +107,6 @@ namespace UI.Menus {
         }
 
         public bool CheckIfMenuIsOpened(MenuType menuType) {
-            Debug.Log(showingMenus.Find(menu => (int) menu == (int) menuType) == menuType);
             return showingMenus.Count > 0 && 
                 showingMenus.Find(menu => (int) menu == (int) menuType) == menuType;
         }
