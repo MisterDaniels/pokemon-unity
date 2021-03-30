@@ -10,18 +10,13 @@ namespace UI.Menus {
     public class InventoryHud : MonoBehaviour {
 
         private Inventory inventory;
-        private Transform itemSlotContainer;
-        private Transform itemSlotTemplate;
+        [SerializeField] Transform itemSlotContainer;
+        [SerializeField] Transform itemSlotTemplate;
 
         private List<Transform> itemSlotTransforms = new List<Transform>(); 
 
         int currentItem;
         int lastSelectedItem = -1;
-
-        private void Awake() {
-            itemSlotContainer = gameObject.transform.Find("Inventory");
-            itemSlotTemplate = itemSlotContainer.Find("ItemSlot");
-        }
 
         public void HandleUpdate() {
             if (Input.GetKeyDown(KeyCode.DownArrow)) {

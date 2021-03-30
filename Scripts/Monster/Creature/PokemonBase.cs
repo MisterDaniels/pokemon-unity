@@ -35,6 +35,8 @@ namespace Monster.Creature {
 
         [SerializeField] List<LearnableMove> learnableMoves;
 
+        [SerializeField] Vector2 saddleLocation = new Vector2(0f, 0f);
+
         public string Name {
             get { return name; }
         }
@@ -111,17 +113,37 @@ namespace Monster.Creature {
             get { return walkLeftSprites; }
         }
 
-        public float GetPokemonSizeMultiplier() {
+        public Vector2 SaddleLocation {
+            get { return saddleLocation; }
+        }
+
+        public float GetPokemonSizeMultiplier(bool isOverworld = false) {
             switch (pokemonSize) {
                 case PokemonSize.Small: {
                     return 1f;
                 } case PokemonSize.Medium: {
+                    if (isOverworld) {
+                        return 1.1f;
+                    }
+
                     return 2f;
                 } case PokemonSize.Large: {
+                    if (isOverworld) {
+                        return 1.2f;
+                    }
+
                     return 3f;
                 } case PokemonSize.ExtraLarge: {
+                    if (isOverworld) {
+                        return 1.3f;
+                    }
+
                     return 4f;
                 } default: {
+                    if (isOverworld) {
+                        return 1.4f;
+                    }
+
                     return 1f;
                 }
             }

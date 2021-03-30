@@ -87,7 +87,7 @@ namespace Monster.Characters {
                     transform.position.x, transform.position.y + 1f), Quaternion.identity);
 
                 var PokemonController = pokemonOverworld.GetComponent<PokemonController>();
-                PokemonController.Assign(this.gameObject);
+                PokemonController.Assign(character, pokemon);
             }
         }
 

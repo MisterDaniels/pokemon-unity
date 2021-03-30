@@ -30,14 +30,7 @@ namespace Monster.Characters {
         SpriteRenderer spriteRenderer;
 
         private void Start() {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
-            walkDownAnim = new SpriteAnimator(walkDownSprites, spriteRenderer);
-            walkUpAnim = new SpriteAnimator(walkUpSprites, spriteRenderer);
-            walkRightAnim = new SpriteAnimator(walkRightSprites, spriteRenderer);
-            walkLeftAnim = new SpriteAnimator(walkLeftSprites, spriteRenderer);
-
-            currentAnim = walkDownAnim;
+            RefreshAnimator();
         }
 
         private void Update() {
@@ -64,6 +57,33 @@ namespace Monster.Characters {
             }
 
             wasPreviouslyMoving = IsMoving;
+        }
+
+        public void ChangeCharacterSprites(
+            List<Sprite> walkDownSprites, 
+            List<Sprite> walkUpSprites, 
+            List<Sprite> walkLeftSprites, 
+            List<Sprite> walkRightSprites
+        ) {
+            this.walkDownSprites = walkDownSprites;
+            this.walkUpSprites = walkUpSprites;
+            this.walkLeftSprites = walkLeftSprites;
+            this.walkRightSprites = walkRightSprites;
+
+            RefreshAnimator();
+        }
+
+        private void RefreshAnimator() {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            walkDownAnim = new SpriteAnimator(walkDownSprites, spriteRenderer);
+            walkUpAnim = new SpriteAnimator(walkUpSprites, spriteRenderer);
+            walkRightAnim = new SpriteAnimator(walkRightSprites, spriteRenderer);
+            walkLeftAnim = new SpriteAnimator(walkLeftSprites, spriteRenderer);
+
+            if (currentAnim == null) {
+                currentAnim = walkDownAnim;
+            }
         }
 
     }
