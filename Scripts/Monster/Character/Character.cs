@@ -5,6 +5,7 @@ using UnityEngine;
 using Core.Mechanic;
 using Util;
 using Map;
+using Monster.Outfits;
 
 namespace Monster.Characters {
 
@@ -86,6 +87,13 @@ namespace Monster.Characters {
             } else {
                 Debug.LogError("Error in Look Towards: You can't ask the character to look diagonally");
             }
+        }
+
+        public void ChangeSprites(OutfitBase outfitBase) {
+            animator.WalkDownSprites = outfitBase.WalkDownSprites;
+            animator.WalkUpSprites = outfitBase.WalkUpSprites;
+            animator.WalkRightSprites = outfitBase.WalkRightSprites;
+            animator.WalkLeftSprites = outfitBase.WalkLeftSprites;
         }
 
         private bool IsPathClear(Vector3 targetPos) {

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fa0e6cc8d20bd4e977bb4f7b19b270, type: 3}
+  m_Name: Blue
+  m_EditorClassIdentifier: 
+  name: Blue
+  outfitType: 0
+  walkDownSprites:
+  - {fileID: -4967039600337863157, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: 4834972583670448941, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: 2927028914861806976, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -6748084251717648357, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  walkUpSprites:
+  - {fileID: -5511507744151237047, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -6661115750855605062, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: 4130312024921312555, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -7292932072183582691, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  walkRightSprites:
+  - {fileID: -4774904139404202410, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -2412730879580126890, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: 4727216083602087571, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -6409997609871628614, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  walkLeftSprites:
+  - {fileID: 1682992432629561144, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -1889554205963698016, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: -2306667935600472170, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}
+  - {fileID: 3345635688121069364, guid: a5814e7c9caffc4449fad27d4af7e986, type: 3}

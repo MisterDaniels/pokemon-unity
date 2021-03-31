@@ -6,6 +6,7 @@ using UnityEditor;
 using Core;
 using Items;
 using Monster.Characters;
+using Monster.Outfits;
 
 namespace Core.Admin {
     
@@ -19,6 +20,8 @@ namespace Core.Admin {
 
         public static DebugCommand KILL_ALL;
         public static DebugCommand<string> ADD_ITEM;
+        public static DebugCommand<string> SET_OUTFIT;
+        public static DebugCommand<string> ADD_OUTFIT;
         public static DebugCommand HELP;
 
         public List<object> commandList;
@@ -40,6 +43,22 @@ namespace Core.Admin {
                 playerInventory.AddItem(new Item(itemBase, 1));
             });
 
+            SET_OUTFIT = new DebugCommand<string>("set_outfit", "Sets outfit to player", "set_outfit <outfitName>", (outfitName) => {
+                Character playerCharacter = GameController.Instance.PlayerController.gameObject.GetComponent<Character>();
+                
+                OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
+
+                playerCharacter.ChangeSprites(outfitBase);
+            });
+
+            ADD_OUTFIT = new DebugCommand<string>("add_outfit", "Add outfit to player", "add_outfit <outfitName>", (outfitName) => {
+                OutfitInventory playerOutfitInventory = GameController.Instance.PlayerController.gameObject.GetComponent<OutfitInventory>();
+                
+                OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
+
+                playerOutfitInventory.AddOutfit(outfitBase);
+            });
+
             HELP = new DebugCommand("help", "Shows a list of commands", "help", () => {
                 showHelp = true;
             });
@@ -47,6 +66,8 @@ namespace Core.Admin {
             commandList = new List<object> {
                 KILL_ALL,
                 ADD_ITEM,
+                SET_OUTFIT,
+                ADD_OUTFIT,
                 HELP
             };
         }
