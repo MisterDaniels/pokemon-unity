@@ -9,6 +9,7 @@ using Util;
 using UI.Menus;
 using Items;
 using Core;
+using Core.Admin;
 
 namespace Monster.Characters {
 
@@ -19,8 +20,10 @@ namespace Monster.Characters {
         private Vector2 input;
         private Character character;
         private PokemonParty pokemonParty;
-        private Transform pokemonOverworld;
+        private PokemonController pokemonController;
         private Inventory inventory;
+
+        public Character Character => character;
 
         void Awake() {
             character = GetComponent<Character>();
@@ -37,18 +40,27 @@ namespace Monster.Characters {
                 if (input.x != 0) input.y = 0;
 
                 if (input != Vector2.zero) {
-                    StartCoroutine(character.Move(input, CheckForEncounters));
+                    if (!character.IsMounted) {
+                        StartCoroutine(character.Move(input, CheckForEncounters));
+                    } else {
+                        pokemonController.AddPattern(input);
+                    }
+                    StartCoroutine(character.Move(input, OnMoveOver));
                 }
             }
 
             character.HandleUpdate();
 
-            if (Input.GetKeyDown(KeyCode.Z)) {
+            if (Input.GetKeyDown(KeyCode.Z) && !character.IsMounted) {
                 Interact();
             }
 
             if (Input.GetKeyDown(KeyCode.X)) {
                 ShowPokemon();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R)) {
+                pokemonController.Unmount();
             }
 
             if (Input.GetKeyDown(KeyCode.I)) {
@@ -59,12 +71,21 @@ namespace Monster.Characters {
                     MenuManager.Instance.HideMenu(MenuType.Inventory);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Quote)) {
+                GameController.Instance.ToggleConsole();
+            }
         }
 
-        private void CheckForEncounters() {
-            if (Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.LongGrassLayer) != null) {
-                if (UnityEngine.Random.Range(1, 101) <= 10) {
-                    OnEncountered();
+        private void OnMoveOver() {
+            var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, character.OffsetY), 0.2f, GameLayers.i.TriggerableLayers);
+
+            foreach(var collider in colliders) {
+                var triggerable = collider.GetComponent<IPlayerTriggerable>();
+
+                if (triggerable != null) {
+                    triggerable.OnPlayerTriggered(this);
+                    break;
                 }
             }
         }
@@ -82,12 +103,12 @@ namespace Monster.Characters {
         private void ShowPokemon() {
             var pokemon = pokemonParty.GetHealthyPokemon();
             
-            if (!pokemonOverworld) {
-                pokemonOverworld = Instantiate(PrefabsReference.Instance.PokemonOverworld.transform, new Vector2(
+            if (!pokemonController) {
+                var pokemonOverworld = Instantiate(PrefabsReference.Instance.PokemonOverworld.transform, new Vector2(
                     transform.position.x, transform.position.y + 1f), Quaternion.identity);
 
-                var PokemonController = pokemonOverworld.GetComponent<PokemonController>();
-                PokemonController.Assign(character, pokemon);
+                pokemonController = pokemonOverworld.GetComponent<PokemonController>();
+                pokemonController.Assign(character, pokemon);
             }
         }
 

@@ -22,6 +22,11 @@ namespace Items {
             set { amount = value; }
         }
 
+        public Item(ItemBase itemBase, int amount) {
+            this._base = itemBase;
+            this.amount = amount;
+        }
+
         public void Use() {
             _base.Use();
         }

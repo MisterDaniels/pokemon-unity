@@ -7,6 +7,7 @@ using UI.Battle;
 using Map;
 using UI;
 using UI.Menus;
+using Core.Admin;
 
 namespace Core {
 
@@ -14,7 +15,9 @@ namespace Core {
         FreeRoam,
         Battle,
         Dialog,
-        Menu
+        Menu,
+        Paused,
+        Debug
     }
 
     public class GameController : MonoBehaviour {
@@ -22,11 +25,19 @@ namespace Core {
         [SerializeField] PlayerController playerController;
         [SerializeField] BattleSystem battleSystem;
         [SerializeField] Camera worldCamera;
+        
+        public static GameController Instance { get; private set; }
 
         GameState state;
+        GameState stateBefore;
+
+        public PlayerController PlayerController => playerController;
+
+        private void Awake() {
+            Instance = this;
+        }
 
         private void Start() {
-            playerController.OnEncountered += StartBattle;
             battleSystem.OnBattleOver += EndBattle;
 
             DialogManager.Instance.OnShowDialog += () => {
@@ -50,7 +61,27 @@ namespace Core {
             };
         }
 
-        private void StartBattle() {
+        public void PauseGame(bool pause) {
+            if (pause) {
+                stateBefore = state;
+                state = GameState.Paused;
+            } else {
+                state = stateBefore;
+            }
+        }
+
+        public void ToggleConsole() {
+            DebugManager.Instance.ToggleConsole();
+
+            if (state != GameState.Debug) {
+                stateBefore = state;
+                state = GameState.Debug;
+            } else {
+                state = stateBefore;
+            }
+        }
+
+        public void StartBattle() {
             state = GameState.Battle;
             battleSystem.gameObject.SetActive(true);
             worldCamera.gameObject.SetActive(false);
@@ -76,6 +107,8 @@ namespace Core {
                 DialogManager.Instance.HandleUpdate();
             } else if (state == GameState.Menu) {
                 MenuManager.Instance.HandleUpdate();
+            } else if (state == GameState.Debug) {
+                DebugManager.Instance.HandleUpdate();
             }
         }
     }

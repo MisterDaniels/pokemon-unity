@@ -21,6 +21,10 @@ namespace Monster.Creature {
         float idleTimer = 0f;
         int currentPattern = 0;
 
+        public Character CharacterOwner {
+            get { return characterOwner; }
+        }
+
         private void Awake() {
             character = GetComponent<Character>();
         }
@@ -44,25 +48,27 @@ namespace Monster.Creature {
         IEnumerator Walk() {
             state = PokemonState.Walking;
 
+            if (character.IsMounted) {
+                characterOwner.IsMoving = true;
+            }
+
             yield return character.Move(movementPattern[0]);
             movementPattern.RemoveAt(0);
+
+            character.LookTowards(owner.transform.position);
+
+            if (character.IsMounted) {
+                characterOwner.IsMoving = false;
+            }
 
             state = PokemonState.Idle;
         }
 
         public void Interact(Transform initiator) {
             if (state == PokemonState.Idle) {
-                state = PokemonState.Interaction;
-
                 character.LookTowards(initiator.position);
 
-                Dialog dialog = new Dialog();
-                dialog.Lines = new List<string>(new string[] { "Eiiiii" });
-
-                StartCoroutine(DialogManager.Instance.ShowDialog(dialog, (bool action) => {
-                    idleTimer = 0f;
-                    state = PokemonState.Idle;
-                }));
+                Mount();
             }
         }
 
@@ -70,12 +76,22 @@ namespace Monster.Creature {
             this.characterOwner = characterOwner;
             this.pokemon = pokemon;
 
-            RefreshPokemon();
+            var characterAnimator = GetComponent<CharacterAnimator>();
+            var pokemonParty = owner.GetComponent<PokemonParty>();
+            var pokemon = pokemonParty.GetHealthyPokemon();
 
+            characterAnimator.WalkDownSprites = pokemon.Base.WalkDownSprites;
+            characterAnimator.WalkUpSprites = pokemon.Base.WalkUpSprites;
+            characterAnimator.WalkRightSprites = pokemon.Base.WalkRightSprites;
+            characterAnimator.WalkLeftSprites = pokemon.Base.WalkLeftSprites;
+
+            RefreshPokemon();
             characterOwner.OnMove += (Vector2 input) => {
                 if ((input.x != 0 && lastMovementPattern.y != 0) ||
                     (input.y != 0 && lastMovementPattern.x != 0)) {
                     movementPattern.Add(lastMovementPattern);
+                    lastMovementPattern = input;
+                    return;
                 }
 
                 lastMovementPattern = input;
@@ -84,7 +100,27 @@ namespace Monster.Creature {
         }
 
         public void Mount() {
-            
+            characterOwner.IsMounted = true;
+            character.IsMounted = true;
+
+            transform.position = characterOwner.transform.position;
+            characterOwner.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0f, 0f);
+
+            character.MoveSpeed = 10f;
+        }
+
+        public void Unmount() {
+            transform.position = character.LastPosition;
+            characterOwner.gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1f, 1f);
+
+            character.MoveSpeed = 5f;
+
+            characterOwner.IsMounted = false;
+            character.IsMounted = false;
+        }
+
+        public void AddPattern(Vector2 input) {
+            movementPattern.Add(input);
         }
 
         private void RefreshPokemon() {

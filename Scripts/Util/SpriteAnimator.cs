@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Util {
+    
     public class SpriteAnimator {
 
         SpriteRenderer spriteRenderer;

@@ -16,7 +16,7 @@ namespace Items {
         }
 
         public override ItemType GetType() {
-            if (pokemon != null) {
+            if (pokemon.Base != null) {
                 return ItemType.Pokemon;
             }
 

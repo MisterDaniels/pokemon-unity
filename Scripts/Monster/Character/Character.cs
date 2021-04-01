@@ -5,6 +5,8 @@ using UnityEngine;
 using Core.Mechanic;
 using Util;
 using Map;
+using Monster.Creature;
+using Monster.Outfits;
 
 namespace Monster.Characters {
 
@@ -13,11 +15,15 @@ namespace Monster.Characters {
         public delegate void PlayerMoveCallback (Vector2 input);
         public event PlayerMoveCallback OnMove;
 
-        public float moveSpeed;
+        [SerializeField] public float moveSpeed = 5f;
 
         private CharacterAnimator animator;
 
-        public bool IsMoving { get; private set; }
+        public bool IsMoving { get; set; }
+        public bool IsMounted { get; set; }
+        public Vector2 LastPosition { get; set; }
+
+        public float OffsetY { get; private set; } = 0.3f;
 
         [SerializeField] public Rect Box;
 
@@ -25,10 +31,23 @@ namespace Monster.Characters {
             get => animator;
         }
 
+        public float MoveSpeed {
+            get { return moveSpeed; }
+            set { moveSpeed = value; }
+        }
+
         private void Awake() {
             animator = GetComponent<CharacterAnimator>();
-            Debug.Log(GetComponent<BoxCollider2D>().transform.position);
-            Debug.Log(transform.position);
+            LastPosition = transform.position;
+            SetPositionAndSnapToTile(transform.position);
+        }
+
+        public void SetPositionAndSnapToTile(Vector2 pos) {
+            // 2.3 -> Floor -> 2 -> 2.5
+            pos.x = Mathf.Floor(pos.x) + 0.5f;
+            pos.y = Mathf.Ceil(pos.y);
+
+            transform.position = pos;
         }
 
         public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null) {
@@ -43,9 +62,15 @@ namespace Monster.Characters {
                 yield break;
             }
 
+            LastPosition = transform.position;
             IsMoving = true;
 
             while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon) {
+                if (IsMounted) {
+                    GetComponent<PokemonController>().CharacterOwner.transform.position = 
+                        Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                }
+
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, 
                     moveSpeed * Time.deltaTime);
                 yield return null;
@@ -57,6 +82,10 @@ namespace Monster.Characters {
 
             OnMoveOver?.Invoke();
             OnMove?.Invoke(moveVec);
+        }
+
+        public IEnumerator MoveTo(Vector2 movePos) {
+            yield return null;
         }
 
         public void HandleUpdate() {
@@ -73,6 +102,13 @@ namespace Monster.Characters {
             } else {
                 Debug.LogError("Error in Look Towards: You can't ask the character to look diagonally");
             }
+        }
+
+        public void ChangeSprites(OutfitBase outfitBase) {
+            animator.WalkDownSprites = outfitBase.WalkDownSprites;
+            animator.WalkUpSprites = outfitBase.WalkUpSprites;
+            animator.WalkRightSprites = outfitBase.WalkRightSprites;
+            animator.WalkLeftSprites = outfitBase.WalkLeftSprites;
         }
 
         private bool IsPathClear(Vector3 targetPos) {

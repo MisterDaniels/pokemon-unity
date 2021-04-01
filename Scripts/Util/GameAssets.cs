@@ -28,9 +28,7 @@ namespace Core {
             }
         }
 
-        public PokemonBase LoadPokemon(int pokemonId) {
-            Debug.Log(Application.dataPath + DataPath["pokemon"]);
-            
+        public PokemonBase LoadPokemon(int pokemonId) {            
             if (File.Exists(Application.dataPath + DataPath["pokemon"])) {
                 return JsonUtility.FromJson<PokemonBase>(File.ReadAllText(DataPath["pokemon"]));
             }

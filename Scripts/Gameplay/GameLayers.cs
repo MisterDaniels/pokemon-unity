@@ -13,6 +13,7 @@ namespace Map {
         [SerializeField] LayerMask playerLayer;
         [SerializeField] LayerMask itemWorldLayer;
         [SerializeField] LayerMask pokemonLayer;
+        [SerializeField] LayerMask portalLayer;
 
         public static GameLayers i { get; set; }
 
@@ -42,6 +43,14 @@ namespace Map {
 
         public LayerMask PokemonLayer {
             get => pokemonLayer;
+        }
+
+        public LayerMask PortalLayer {
+            get => portalLayer;
+        }
+
+        public LayerMask TriggerableLayers {
+            get => LongGrassLayer | portalLayer;
         }
 
     }
