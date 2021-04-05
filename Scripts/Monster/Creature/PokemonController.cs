@@ -55,7 +55,7 @@ namespace Monster.Creature {
             yield return character.Move(movementPattern[0]);
             movementPattern.RemoveAt(0);
 
-            character.LookTowards(owner.transform.position);
+            character.LookTowards(characterOwner.gameObject.transform.position);
 
             if (character.IsMounted) {
                 characterOwner.IsMoving = false;
@@ -77,8 +77,7 @@ namespace Monster.Creature {
             this.pokemon = pokemon;
 
             var characterAnimator = GetComponent<CharacterAnimator>();
-            var pokemonParty = owner.GetComponent<PokemonParty>();
-            var pokemon = pokemonParty.GetHealthyPokemon();
+            var pokemonParty = characterOwner.gameObject.GetComponent<PokemonParty>();
 
             characterAnimator.WalkDownSprites = pokemon.Base.WalkDownSprites;
             characterAnimator.WalkUpSprites = pokemon.Base.WalkUpSprites;

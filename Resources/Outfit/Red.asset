@@ -9,28 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27fa0e6cc8d20bd4e977bb4f7b19b270, type: 3}
+  m_Script: {fileID: 11500000, guid: 1205d74a9a4d51866ad9160592a899da, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
   name: Red
   outfitType: 0
   walkDownSprites:
-  - {fileID: 7152930139536384079, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: -5725962078152895296, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: -8401692288953904933, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: 7888922196035610388, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
+  - {fileID: 7152930139536384079, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: -5725962078152895296, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: -8401692288953904933, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: 7888922196035610388, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
   walkUpSprites:
-  - {fileID: -4445699719359273135, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: 1892806461834874077, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: -8627026541424588849, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: -6780520195603233165, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
+  - {fileID: -4445699719359273135, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: 1892806461834874077, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: -8627026541424588849, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: -6780520195603233165, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
   walkRightSprites:
-  - {fileID: -3303779423006393323, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: -790699523677361007, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: 8470420716495695676, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: 6167071470516247665, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
+  - {fileID: -3303779423006393323, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: -790699523677361007, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: 8470420716495695676, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: 6167071470516247665, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
   walkLeftSprites:
-  - {fileID: -1038918931832879880, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: 2690600881683387669, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: 6634202828824015816, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
-  - {fileID: -5008138227279614530, guid: b107491991d8e1848af618c67d83ba2c, type: 3}
+  - {fileID: -1038918931832879880, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: 2690600881683387669, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: 6634202828824015816, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
+  - {fileID: -5008138227279614530, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}

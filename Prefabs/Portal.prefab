@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 7840865483779322141}
   - component: {fileID: 7840865483779322140}
   - component: {fileID: 7840865483779322594}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -98,8 +98,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7840865483779322143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d5ac6d88c7f42e489297bf82fd6a06d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2dc051c33ca5c1e5802e494bd0c303e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoadId: -1
   spawnPoint: {fileID: 7840865483318183401}
+  destinationPortal: 0

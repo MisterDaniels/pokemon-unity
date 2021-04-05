@@ -41,11 +41,10 @@ namespace Monster.Characters {
 
                 if (input != Vector2.zero) {
                     if (!character.IsMounted) {
-                        StartCoroutine(character.Move(input, CheckForEncounters));
+                        StartCoroutine(character.Move(input, OnMoveOver));
                     } else {
                         pokemonController.AddPattern(input);
                     }
-                    StartCoroutine(character.Move(input, OnMoveOver));
                 }
             }
 
