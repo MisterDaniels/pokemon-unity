@@ -50,13 +50,13 @@ namespace Items {
         public Color GetItemRarenessColor() {
             switch (rarenessType) {
                 case RarenessType.Common: {
-                    return new Color(1f, 1f, 1f, 1f);
+                    return new Color32(123, 123, 123, 255);
                 } case RarenessType.Rare: {
-                    return new Color(1f, 1f, 1f, 1f);
+                    return new Color32(160, 64, 160, 255);
                 } case RarenessType.Unique: {
-                    return new Color(1f, 1f, 1f, 1f);
+                    return new Color32(224, 192, 104, 255);
                 } default: {
-                    return new Color(1f, 1f, 1f, 1f);
+                    return new Color32(0, 0, 0, 255);
                 }
             }
         }

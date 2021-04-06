@@ -149,6 +149,50 @@ namespace Monster.Creature {
             }
         }
 
+        public Color GetPokemonMainTypeColor() {
+            switch (mainType) {
+                case PokemonType.None: {
+                    return new Color32(104, 160, 144, 255);
+                } case PokemonType.Normal: {
+                    return new Color32(168, 168, 120, 255);
+                } case PokemonType.Fire: {
+                    return new Color32(240, 128, 48, 255);
+                } case PokemonType.Water: {
+                    return new Color32(104, 144, 240, 255);
+                } case PokemonType.Electric: {
+                    return new Color32(248, 208, 48, 255);
+                } case PokemonType.Grass: {
+                    return new Color32(120, 200, 80, 255);
+                } case PokemonType.Ice: {
+                    return new Color32(152, 216, 216, 255);
+                } case PokemonType.Fighting: {
+                    return new Color32(192, 48, 40, 255);
+                } case PokemonType.Poison: {
+                    return new Color32(160, 64, 160, 255);
+                } case PokemonType.Ground: {
+                    return new Color32(224, 192, 104, 255);
+                } case PokemonType.Flying: {
+                    return new Color32(168, 144, 240, 255);
+                } case PokemonType.Psychic: {
+                    return new Color32(248, 88, 136, 255);
+                } case PokemonType.Bug: {
+                    return new Color32(168, 184, 32, 255);
+                } case PokemonType.Rock: {
+                    return new Color32(184, 160, 56, 255);
+                } case PokemonType.Ghost: {
+                    return new Color32(112, 88, 152, 255);
+                } case PokemonType.Dark: {
+                    return new Color32(112, 88, 72, 255);
+                } case PokemonType.Steel: {
+                    return new Color32(184, 184, 208, 255);
+                } case PokemonType.Fairy: {
+                    return new Color32(238, 153, 172, 255);
+                } default: {
+                    return new Color32(0, 0, 0, 255);
+                }
+            }
+        }
+
     }
 
     [System.Serializable]

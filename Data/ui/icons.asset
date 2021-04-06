@@ -169,8 +169,8 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 15
     m_Scale: 1
-    m_Name: 006-mega-x
-    m_HashCode: -408797792
+    m_Name: Charizard
+    m_HashCode: -1299800420
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 16
@@ -437,15 +437,15 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 68
       m_Height: 56
-      m_HorizontalBearingX: -34
-      m_HorizontalBearingY: 28
-      m_HorizontalAdvance: 68
+      m_HorizontalBearingX: -12.7
+      m_HorizontalBearingY: 45.8
+      m_HorizontalAdvance: 40.3
     m_GlyphRect:
       m_X: 1156
       m_Y: 0
       m_Width: 68
       m_Height: 56
-    m_Scale: 1
+    m_Scale: 2
     m_AtlasIndex: 0
     sprite: {fileID: 0}
   - m_Index: 16

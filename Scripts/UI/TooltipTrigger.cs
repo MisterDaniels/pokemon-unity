@@ -1,22 +1,20 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI {
 
-    public class TooltipTrigger : MonoBehaviour {
+    public abstract class TooltipTrigger : MonoBehaviour {
+        
+        protected LTDescr delay;
 
-        [Multiline()]
-        [SerializeField] public string text;
-
-        private static LTDescr delay;
-    
-        private void OnMouseEnter() {
-            delay = LeanTween.delayedCall(0.1f, () => {
-                TooltipSystem.Show("teste qualquer");
+        protected virtual void OnMouseEnter() {
+            delay = LeanTween.delayedCall(0.5f, () => {
+                TooltipSystem.Show("Tooltip not implemented");
             });
         }
 
-        private void OnMouseExit() {
+        protected virtual void OnMouseExit() {
             LeanTween.cancel(delay.uniqueId);
             TooltipSystem.Hide();
         }

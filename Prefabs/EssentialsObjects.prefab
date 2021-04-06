@@ -879,7 +879,7 @@ MonoBehaviour:
   outfits:
   - {fileID: 11400000, guid: 4b89961ac820d2d2282f31d596b1a11b, type: 2}
   - {fileID: 11400000, guid: c2d1b7e735eda3a509b3491de077d570, type: 2}
-  currentOutfitIndex: 1
+  currentOutfitIndex: 0
 --- !u!1 &1007687127930693748
 GameObject:
   m_ObjectHideFlags: 0

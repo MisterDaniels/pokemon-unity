@@ -27,18 +27,9 @@ namespace Items {
         public void Interact(Transform initiator) {
             List<string> texts = new List<string>();
 
-            switch(item.Base.GetType()) {
-                case ItemType.Pokemon:
-                    texts.Add($"Você quer pegar a { item.Base.Name } com o Pokémon { ((Pokeball) item.Base).Pokemon.Base.Name } level { ((Pokeball) item.Base).Pokemon.Level }?");
-                    break;
-                case ItemType.Catch:
-                case ItemType.Potion:
-                default:
-                    texts.Add($"Você quer pegar { item.Amount }x o item { item.Base.Name }?");
-                    break;
-            }
-
+            texts.Add($"Você quer pegar { GetItemDescription() }?");
             texts.Add("?");
+            
             Dialog dialog = new Dialog();
             dialog.Lines = texts;
 
@@ -57,6 +48,19 @@ namespace Items {
 
         public void DestroySelf() {
             Destroy(gameObject);
+        }
+
+        public string GetItemDescription() {
+            switch(item.Base.GetType()) {
+                case ItemType.Pokemon:
+                    return $"{ item.Base.Name } com o Pokémon <color=#{ ColorUtility.ToHtmlStringRGBA(((Pokeball) item.Base).Pokemon.Base.GetPokemonMainTypeColor()) }>{ ((Pokeball) item.Base).Pokemon.Base.Name }</color> <sprite name=\"{ ((Pokeball) item.Base).Pokemon.Base.Name }\"> level { ((Pokeball) item.Base).Pokemon.Level }";
+                    break;
+                case ItemType.Catch:
+                case ItemType.Potion:
+                default:
+                    return $"<color=#{ ColorUtility.ToHtmlStringRGBA(item.Base.GetItemRarenessColor()) }>{ item.Base.Name }</color> <sprite name=\"{ item.Base.Name }\"> { item.Amount }x";
+                    break;
+            }
         }
 
     }
