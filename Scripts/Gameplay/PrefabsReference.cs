@@ -9,6 +9,7 @@ namespace Util {
         
         [SerializeField] GameObject pokemonOverworld;
         [SerializeField] GameObject itemOverworld;
+        [SerializeField] GameObject itemCanved;
 
         public static PrefabsReference Instance { get; set; }
 
@@ -22,6 +23,10 @@ namespace Util {
 
         public GameObject ItemOverworld {
             get => itemOverworld;
+        }
+
+        public GameObject ItemCanved {
+            get => itemCanved;
         }
 
     }

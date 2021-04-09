@@ -879,7 +879,7 @@ MonoBehaviour:
   outfits:
   - {fileID: 11400000, guid: 4b89961ac820d2d2282f31d596b1a11b, type: 2}
   - {fileID: 11400000, guid: c2d1b7e735eda3a509b3491de077d570, type: 2}
-  currentOutfitIndex: 0
+  currentOutfitIndex: 1
 --- !u!1 &1007687127930693748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007687128279344005}
   - component: {fileID: 1007687128279343994}
+  - component: {fileID: 8839805762450685453}
   - component: {fileID: 1007687128279343992}
   - component: {fileID: 2493580758887871537}
   m_Layer: 0
@@ -1577,6 +1578,22 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &8839805762450685453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007687128279343993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!81 &1007687128279343992
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3217,6 +3234,7 @@ MonoBehaviour:
   playerController: {fileID: 1007687127848096892}
   battleSystem: {fileID: 1007687128062527393}
   worldCamera: {fileID: 1007687128279343994}
+  canvas: {fileID: 4912899789202240525}
 --- !u!114 &1007687129077724761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3250,6 +3268,9 @@ MonoBehaviour:
   portalLayer:
     serializedVersion: 2
     m_Bits: 4096
+  interfaceLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1007687129077724764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3264,6 +3285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemonOverworld: {fileID: 190241532875636438, guid: 1571ccab815270a4a97860a59c298f53, type: 3}
   itemOverworld: {fileID: 5155851920262055747, guid: 1872ef7865324c6a2ab37a1205efd951, type: 3}
+  itemCanved: {fileID: 5213125862468735299, guid: 32f9981f59a95fbd2b594abe13167a80, type: 3}
 --- !u!114 &268079751953560776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4370,6 +4392,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1007687128822099126}
     m_Modifications:
+    - target: {fileID: 152515388112813615, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1687091533
+      objectReference: {fileID: 0}
+    - target: {fileID: 829894244971864333, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263943751709283331, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4449708695452736196, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4454,9 +4488,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4449708695452736197, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1007687128279343994}
+    - target: {fileID: 4449708695452736197, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1687091533
+      objectReference: {fileID: 0}
     - target: {fileID: 4449708695452736248, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449708696643090728, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -108.76001
       objectReference: {fileID: 0}
     - target: {fileID: 6842161980062930708, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4481,6 +4527,14 @@ PrefabInstance:
     - target: {fileID: 6842161980062930708, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582404147086180979, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582404147086180979, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1687091533
       objectReference: {fileID: 0}
     - target: {fileID: 8667467236767139045, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4571,5 +4625,10 @@ GameObject:
 --- !u!224 &4912899789202240561 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4449708695452736196, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+  m_PrefabInstance: {fileID: 8786147044068749045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4912899789202240525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4449708695452736248, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
   m_PrefabInstance: {fileID: 8786147044068749045}
   m_PrefabAsset: {fileID: 0}

@@ -10,7 +10,7 @@ using Monster.Outfits;
 
 namespace Monster.Characters {
 
-    public class Character : MonoBehaviour {
+    public class Character : GameUtils {
 
         public delegate void PlayerMoveCallback (Vector2 input);
         public event PlayerMoveCallback OnMove;
@@ -40,14 +40,6 @@ namespace Monster.Characters {
             animator = GetComponent<CharacterAnimator>();
             LastPosition = transform.position;
             SetPositionAndSnapToTile(transform.position);
-        }
-
-        public void SetPositionAndSnapToTile(Vector2 pos) {
-            // 2.3 -> Floor -> 2 -> 2.5
-            pos.x = Mathf.Floor(pos.x) + 0.5f;
-            pos.y = Mathf.Ceil(pos.y);
-
-            transform.position = pos;
         }
 
         public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null) {

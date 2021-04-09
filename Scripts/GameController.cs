@@ -25,6 +25,7 @@ namespace Core {
         [SerializeField] PlayerController playerController;
         [SerializeField] BattleSystem battleSystem;
         [SerializeField] Camera worldCamera;
+        [SerializeField] GameObject canvas;
         
         public static GameController Instance { get; private set; }
 
@@ -32,6 +33,7 @@ namespace Core {
         GameState stateBefore;
 
         public PlayerController PlayerController => playerController;
+        public GameObject Canvas => canvas;
 
         private void Awake() {
             Instance = this;

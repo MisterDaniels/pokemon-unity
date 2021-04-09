@@ -7,10 +7,11 @@ using UI;
 
 namespace Items {
 
-    public class ItemWorld : MonoBehaviour, Interactable {
+    public class ItemWorld : MonoBehaviour {
 
         [SerializeField] Item item;
         private SpriteRenderer spriteRenderer;
+        private DragDrop dragDrop;
 
         public Item Item {
             get { return item; }
@@ -18,27 +19,11 @@ namespace Items {
 
         private void Awake() {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            dragDrop = GetComponent<DragDrop>();
             
             if (item.Base != null) {
                 SetItem(item);
             }
-        }
-
-        public void Interact(Transform initiator) {
-            List<string> texts = new List<string>();
-
-            texts.Add($"Você quer pegar { GetItemDescription() }?");
-            texts.Add("?");
-            
-            Dialog dialog = new Dialog();
-            dialog.Lines = texts;
-
-            StartCoroutine(DialogManager.Instance.ShowDialog(dialog, (bool took) => {
-                if (took) {
-                    initiator.GetComponent<Inventory>()?.AddItem(item);
-                    DestroySelf();
-                }
-            }));
         }
 
         public void SetItem(Item item) {
@@ -48,6 +33,7 @@ namespace Items {
 
         public void DestroySelf() {
             Destroy(gameObject);
+            Destroy(dragDrop.ItemHighlight);
         }
 
         public string GetItemDescription() {

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Items;
+using Core.Mechanic;
 
 namespace UI {
 
@@ -13,14 +14,18 @@ namespace UI {
         }
 
         protected override void OnMouseEnter() {
-            delay = LeanTween.delayedCall(0.1f, () => {
-                TooltipSystem.Show(itemWorld.GetItemDescription());
-            });
+            if (!GetComponent<DragDrop>().IsDragging) {
+                delay = LeanTween.delayedCall(0.5f, () => {
+                    TooltipSystem.Show(itemWorld.GetItemDescription());
+                });
+            }
         }
 
         protected override void OnMouseExit() {
-            LeanTween.cancel(delay.uniqueId);
-            TooltipSystem.Hide();
+            if (delay != null) {
+                LeanTween.cancel(delay.uniqueId);
+                TooltipSystem.Hide();
+            }
         }
 
     }
