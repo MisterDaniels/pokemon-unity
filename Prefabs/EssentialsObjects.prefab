@@ -710,7 +710,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -851419769
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7152930139536384079, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3198,6 +3198,7 @@ GameObject:
   - component: {fileID: 8469463212452491583}
   - component: {fileID: 4406248372100794252}
   - component: {fileID: 6686597402919419872}
+  - component: {fileID: 7224689585837829088}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3356,6 +3357,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 8401558158356164226}
+--- !u!114 &7224689585837829088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007687129077724754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fa649f5cd3b2b6f8c75c93974e7aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
 --- !u!1 &1007687129147100010
 GameObject:
   m_ObjectHideFlags: 0
