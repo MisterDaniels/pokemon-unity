@@ -864,6 +864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  size: 30
 --- !u!114 &3691146420032147439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3369,7 +3370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fa649f5cd3b2b6f8c75c93974e7aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
+  tileDataBases:
+  - {fileID: 11400000, guid: 7587820775310137ebc512b3914ec4f7, type: 2}
+  - {fileID: 11400000, guid: 569347ed4c3d69f6aa0a3874e2092ccd, type: 2}
 --- !u!1 &1007687129147100010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4418,6 +4421,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4449708694974271633, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4449708695452736196, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4513,6 +4520,10 @@ PrefabInstance:
     - target: {fileID: 4449708695452736248, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449708695910953780, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4449708696643090728, guid: 9a63749c4a5b38a77b9f85abcadb508d, type: 3}
       propertyPath: m_AnchoredPosition.x

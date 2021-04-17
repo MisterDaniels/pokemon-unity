@@ -3011,7 +3011,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlotContainer: {fileID: 512457702296873003}
   itemSlotTemplate: {fileID: 4449708696889560471}
-  itemSlotQuantity: 30
 --- !u!1 &4449708696198351649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3684,6 +3683,7 @@ GameObject:
   - component: {fileID: 7041466468019407458}
   - component: {fileID: 1075979214960050791}
   - component: {fileID: 4444748102010880018}
+  - component: {fileID: 5652219900654017892}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -3813,6 +3813,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eadfa510e9ae8d35b525b31d853baf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5652219900654017892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449708696889560456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee24cd3ed3054840a7e385540d8f1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4619608044173008530

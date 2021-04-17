@@ -11,10 +11,10 @@ namespace UI.Menus {
 
         [SerializeField] Transform itemSlotContainer;
         [SerializeField] Transform itemSlotTemplate;
-        [SerializeField] int itemSlotQuantity = 30;
 
         private Inventory inventory;
         private List<Transform> itemSlotTransforms = new List<Transform>(); 
+        private int itemSlotQuantity = 0;
 
         int currentItem;
         int lastSelectedItem = -1;
@@ -35,6 +35,11 @@ namespace UI.Menus {
         }
 
         public void SetInventory(Inventory inventory) {
+            if (this.inventory != inventory) {
+                itemSlotQuantity = inventory.Items.Count;
+                InitializeInventorySlots();
+            }
+
             this.inventory = inventory;
 
             inventory.OnItemListChanged += RefreshInventoryItems;
@@ -42,10 +47,17 @@ namespace UI.Menus {
             RefreshInventoryItems();
         }
 
-        private void Awake() {
+        private void InitializeInventorySlots() {
+            foreach (Transform itemSlotTransform in itemSlotTransforms) {
+                Destroy(itemSlotTransform.gameObject);
+            }
+
+            itemSlotTransforms.Clear();
+
             for (int i = 0; i < itemSlotQuantity; i++) {
                 Transform itemSlotTransform = Instantiate(itemSlotTemplate, itemSlotContainer);
 
+                itemSlotTransform.gameObject.name = i.ToString();
                 itemSlotTransform.gameObject.SetActive(true);
                 itemSlotTransforms.Add(itemSlotTransform);
             }
@@ -63,18 +75,20 @@ namespace UI.Menus {
                 outline.effectColor = Color.black;
             }
 
-            for (int i = 0; i < inventory.Items.Count; i++) {
-                Outline outline = itemSlotTransforms[i].GetComponent<Outline>();
-                outline.effectColor = inventory.Items[i].Base.GetItemRarenessColor();
+            for (int i = 0; i < itemSlotQuantity; i++) {
+                if (inventory.Items[i] != null) {
+                    Outline outline = itemSlotTransforms[i].GetComponent<Outline>();
+                    outline.effectColor = inventory.Items[i].Base.GetItemRarenessColor();
 
-                Image image = itemSlotTransforms[i].Find("Image").GetComponent<Image>();
-                image.sprite = inventory.Items[i].Base.Sprite;
-                image.gameObject.SetActive(true);
+                    Image image = itemSlotTransforms[i].Find("Image").GetComponent<Image>();
+                    image.sprite = inventory.Items[i].Base.Sprite;
+                    image.gameObject.SetActive(true);
 
-                if (inventory.Items[i].Amount > 1) {
-                    Text quantityText = itemSlotTransforms[i].Find("Quantity").GetComponent<Text>();
-                    quantityText.text = inventory.Items[i].Amount.ToString();
-                    quantityText.gameObject.SetActive(true);
+                    if (inventory.Items[i].Amount > 1) {
+                        Text quantityText = itemSlotTransforms[i].Find("Quantity").GetComponent<Text>();
+                        quantityText.text = inventory.Items[i].Amount.ToString();
+                        quantityText.gameObject.SetActive(true);
+                    }
                 }
             }                
         }

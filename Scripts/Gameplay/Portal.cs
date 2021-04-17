@@ -41,7 +41,7 @@ namespace Map {
 
             var destPortal = FindObjectsOfType<Portal>().First(portal => portal != this && 
                 portal.destinationPortal == this.destinationPortal);
-            player.Character.SetPositionAndSnapToTile(destPortal.SpawnPoint.position);
+            player.Character.SetCharacterPositionAndSnapToTile(destPortal.SpawnPoint.position);
 
             GameController.Instance.PauseGame(false);
 

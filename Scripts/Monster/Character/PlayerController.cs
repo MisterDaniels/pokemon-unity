@@ -41,7 +41,9 @@ namespace Monster.Characters {
 
                 if (input != Vector2.zero) {
                     if (!character.IsMounted) {
-                        StartCoroutine(character.Move(input, OnMoveOver));
+                        StartCoroutine(character.Move(input, OnMoveOver, 
+                            MapManager.Instance.GetTileWalkingSpeed(character.GetTransformWithFooterCalculation()
+                                + (Vector3) input)));
                     } else {
                         pokemonController.AddPattern(input);
                     }

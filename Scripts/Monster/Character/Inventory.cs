@@ -10,17 +10,30 @@ namespace Monster.Characters {
 
     public class Inventory : MonoBehaviour {
 
-        [SerializeField] List<Item> items;
+        [SerializeField] Dictionary<int, Item> items;
+        [SerializeField] int size;
 
         public event Action OnItemListChanged;
 
-        public List<Item> Items { 
+        public Dictionary<int, Item> Items { 
             get {
                 return items;
             }
         }
 
-        public void AddItem(Item item) {
+        public int Size { 
+            get {
+                return size;
+            }
+            set {
+                size = value;
+            }
+        }
+
+        public void AddItem(Item item, int slotIndex = -1, Action<bool, Item> OnAddOver = null) {
+            bool itemAdded = false;
+            Item itemToDrop = null;
+            
             switch(item.Base.GetType()) {
                 case ItemType.Pokemon:
                     PokemonParty pokemonParty = GetComponent<PokemonParty>();
@@ -38,23 +51,35 @@ namespace Monster.Characters {
                     break;
             }
 
+            if (slotIndex == -1) {
+                slotIndex = GetFirstIndexItemsSlotAvaiable();
+            }
+
+            if (items[slotIndex] != null) {
+                itemToDrop = items[slotIndex];
+            }
+
             if (item.Base.IsStackable()) {
                 bool itemAlreadyInInventory = false;
 
-                foreach (Item inventoryItem in items) {
-                    if (inventoryItem.Base.Name == item.Base.Name) {
-                        inventoryItem.Amount += item.Amount;
-                        itemAlreadyInInventory = true;
-                    }
+                if (items[slotIndex] != null && 
+                    items[slotIndex].Base.Name == item.Base.Name) {
+                    items[slotIndex].Amount += item.Amount;
+                    itemAlreadyInInventory = true;
+                    itemAdded = true;
+                    itemToDrop = null;
                 }
 
                 if (!itemAlreadyInInventory) {
-                    items.Add(item);
+                    items[slotIndex] = item;
+                    itemAdded = true;
                 }
             } else {
-                items.Add(item);
+                items[slotIndex] = item;
+                itemAdded = true;
             }
 
+            OnAddOver?.Invoke(itemAdded, itemToDrop);
             OnItemListChanged?.Invoke();
         }
 
@@ -69,8 +94,10 @@ namespace Monster.Characters {
             itemToRemove.Amount -= amount;
 
             if (itemToRemove.Amount == 0) {
-                items.RemoveAt(index);
+                items.Remove(index);
             }
+
+            OnItemListChanged?.Invoke();
 
             return true;
         }
@@ -86,6 +113,24 @@ namespace Monster.Characters {
                 SpawnManager.Instance.SpawnItemInWorld(itemToDrop,
                     new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f));
             }
+        }
+
+        private void Awake() {
+            items = new Dictionary<int, Item>(size);
+            
+            for (int i = 0; i < size; i++) {
+                items.Add(i, null);
+            }
+        }
+
+        private int GetFirstIndexItemsSlotAvaiable() {
+            for (int i = 0; i < items.Count; i++) {
+                if (items[i] == null) {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
     }

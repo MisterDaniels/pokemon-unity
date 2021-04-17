@@ -4,17 +4,23 @@ using UnityEngine;
 using Core.Mechanic;
 using Monster.Characters;
 using UI;
+using Util;
 
 namespace Items {
 
-    public class ItemWorld : MonoBehaviour {
+    public class ItemWorld : GameUtils, Draggable {
 
         [SerializeField] Item item;
         private SpriteRenderer spriteRenderer;
         private DragDrop dragDrop;
 
         public Item Item {
-            get { return item; }
+            get { 
+                return item;
+            }
+            set {
+                item = value;
+            }
         }
 
         private void Awake() {
@@ -47,6 +53,10 @@ namespace Items {
                     return $"<color=#{ ColorUtility.ToHtmlStringRGBA(item.Base.GetItemRarenessColor()) }>{ item.Base.Name }</color> <sprite name=\"{ item.Base.Name }\"> { item.Amount }x";
                     break;
             }
+        }
+
+        public Item GetItem() {
+            return item;
         }
 
     }

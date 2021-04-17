@@ -39,10 +39,10 @@ namespace Monster.Characters {
         private void Awake() {
             animator = GetComponent<CharacterAnimator>();
             LastPosition = transform.position;
-            SetPositionAndSnapToTile(transform.position);
+            SetCharacterPositionAndSnapToTile(transform.position);
         }
 
-        public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null) {
+        public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null, float speedMultiplier = 1f) {
             animator.MoveX = Mathf.Clamp(moveVec.x, -1f, 1f);
             animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f);
 
@@ -60,11 +60,12 @@ namespace Monster.Characters {
             while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon) {
                 if (IsMounted) {
                     GetComponent<PokemonController>().CharacterOwner.transform.position = 
-                        Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                        Vector3.MoveTowards(transform.position, targetPos, (moveSpeed * speedMultiplier)
+                        * Time.deltaTime);
                 }
 
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, 
-                    moveSpeed * Time.deltaTime);
+                    (moveSpeed * speedMultiplier) * Time.deltaTime);
                 yield return null;
             }
 
@@ -101,6 +102,13 @@ namespace Monster.Characters {
             animator.WalkUpSprites = outfitBase.WalkUpSprites;
             animator.WalkRightSprites = outfitBase.WalkRightSprites;
             animator.WalkLeftSprites = outfitBase.WalkLeftSprites;
+        }
+
+        public Vector3 GetTransformWithFooterCalculation() {
+            Vector3 position = transform.position;
+            position.y -= 0.5f;
+
+            return position;
         }
 
         private bool IsPathClear(Vector3 targetPos) {
