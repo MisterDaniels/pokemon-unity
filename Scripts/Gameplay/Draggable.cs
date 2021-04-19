@@ -9,6 +9,8 @@ namespace Core.Mechanic {
 
         Item GetItem();
 
+        void SetItem(Item item);
+
     }
 
 }

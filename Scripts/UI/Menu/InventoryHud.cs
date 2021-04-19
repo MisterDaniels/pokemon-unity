@@ -22,15 +22,6 @@ namespace UI.Menus {
         public void HandleUpdate() {
             if (itemSlotTransforms.Count > 0) {
                 UpdateItemSelection(currentItem);
-
-                if (Input.GetKeyDown(KeyCode.X)) { // Drop item
-                    inventory.DropItem(currentItem, 1);
-                    RefreshInventoryItems();
-                } else if (Input.GetKeyDown(KeyCode.Z)) { // Use item
-                    inventory.RemoveItem(currentItem, 1);
-                    inventory.Items[currentItem].Use();
-                    RefreshInventoryItems();
-                }
             }
         }
 

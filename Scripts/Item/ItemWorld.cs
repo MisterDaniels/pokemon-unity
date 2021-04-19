@@ -14,15 +14,6 @@ namespace Items {
         private SpriteRenderer spriteRenderer;
         private DragDrop dragDrop;
 
-        public Item Item {
-            get { 
-                return item;
-            }
-            set {
-                item = value;
-            }
-        }
-
         private void Awake() {
             spriteRenderer = GetComponent<SpriteRenderer>();
             dragDrop = GetComponent<DragDrop>();

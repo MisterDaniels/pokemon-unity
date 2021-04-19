@@ -94,7 +94,7 @@ namespace Monster.Characters {
             itemToRemove.Amount -= amount;
 
             if (itemToRemove.Amount == 0) {
-                items.Remove(index);
+                items[index] = null;
             }
 
             OnItemListChanged?.Invoke();
@@ -102,17 +102,20 @@ namespace Monster.Characters {
             return true;
         }
 
-        public void DropItem(int index, int amount) {
-            Item itemToDrop = items[index];
+        public void RemoveAllItem(int index) {
+            items[index] = null;
 
-            bool removedItem = RemoveItem(index, amount);
+            OnItemListChanged?.Invoke();
+        }
 
-            if (removedItem) {
-                itemToDrop.Amount = amount;
+        public void ChangeItemOrder(int changeIndex, int toIndex) {
+            Item itemToChange = items[changeIndex];
+            Item itemToTo = items[toIndex];
 
-                SpawnManager.Instance.SpawnItemInWorld(itemToDrop,
-                    new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f));
-            }
+            items[changeIndex] = itemToTo;
+            items[toIndex] = itemToChange;
+
+            OnItemListChanged?.Invoke();
         }
 
         private void Awake() {

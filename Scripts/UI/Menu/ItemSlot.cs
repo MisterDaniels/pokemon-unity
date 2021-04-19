@@ -17,34 +17,49 @@ namespace UI {
         public void OnDrop(PointerEventData eventData) {
             Item itemDropped = eventData.pointerDrag.GetComponent<Draggable>().GetItem();
 
-            item = itemDropped;
+            if (itemDropped != null) {
+                ItemSlot itemSlot = eventData.pointerDrag.GetComponent<ItemSlot>();
 
-            GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.AddItem(itemDropped, 
-                int.Parse(gameObject.name), (bool added, Item itemToDrop) => {
-                    ItemWorld itemWorld = eventData.pointerDrag.GetComponent<ItemWorld>();
-                    ItemSlot itemSlot = eventData.pointerDrag.GetComponent<ItemSlot>();
-
-                    if (itemToDrop != null) {
-                        if (itemSlot != null) {
-                            if (itemSlot.GetItem() != null) {
-                                GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.AddItem(itemToDrop,
-                                    int.Parse(itemSlot.gameObject.name));
-                            }
+                if (itemSlot != null) {
+                    if (itemSlot.GetItem() != null) {
+                        if (item != null) {
+                            GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.ChangeItemOrder(
+                                int.Parse(itemSlot.gameObject.name), int.Parse(gameObject.name));
+                            itemSlot.SetItem(item);
                         } else {
-                            GameObject droppedItemWorld = Instantiate(PrefabsReference.Instance.ItemOverworld,
-                                itemWorld.transform.position, Quaternion.identity);
-                            droppedItemWorld.GetComponent<ItemWorld>().SetItem(itemToDrop);
+                            GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.AddItem(itemDropped,
+                                int.Parse(gameObject.name));
+                            GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.RemoveAllItem(int.Parse(itemSlot.gameObject.name));
+                            itemSlot.SetItem(null);
                         }
                     }
+                } else {
+                    GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.AddItem(itemDropped, 
+                        int.Parse(gameObject.name), (bool added, Item itemToDrop) => {
+                            ItemWorld itemWorld = eventData.pointerDrag.GetComponent<ItemWorld>();
 
-                    if (added && itemSlot == null) {
-                        itemWorld.DestroySelf();
-                    }
-                });
+                            if (itemToDrop != null) {
+                                GameObject droppedItemWorld = Instantiate(PrefabsReference.Instance.ItemOverworld,
+                                    itemWorld.transform.position, Quaternion.identity);
+                                droppedItemWorld.GetComponent<ItemWorld>().SetItem(itemToDrop);
+                            }
+
+                            if (added) {
+                                itemWorld.DestroySelf();
+                            }
+                        });
+                }
+
+                item = itemDropped;
+            }
         }
 
         public Item GetItem() {
             return item;
+        }
+
+        public void SetItem(Item item) {
+            this.item = item;
         }
 
     }

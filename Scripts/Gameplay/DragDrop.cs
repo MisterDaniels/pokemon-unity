@@ -8,6 +8,7 @@ using Util;
 using Map;
 using Items;
 using Core;
+using Monster.Characters;
 
 namespace Core.Mechanic {
 
@@ -73,6 +74,9 @@ namespace Core.Mechanic {
 
                         droppedItemWorld.SetItem(itemSlot.GetItem());
                         droppedItemWorld.SetObjectPositionAndSnapToTile(itemHighlight.transform.position);
+
+                        GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>()?.RemoveAllItem(int.Parse(gameObject.name));
+                        itemSlot.SetItem(null);
                     } else {
                         SetObjectPositionAndSnapToTile(itemHighlight.transform.position);
                     }
