@@ -5,6 +5,13 @@ using Util;
 
 namespace Monster.Characters {
 
+    public enum FacingDirection {
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
+
     public class CharacterAnimator : MonoBehaviour {
 
         [SerializeField] List<Sprite> walkDownSprites;
@@ -40,6 +47,7 @@ namespace Monster.Characters {
         public float MoveX { get; set; }
         public float MoveY { get; set; }
         public bool IsMoving { get; set; }
+        public FacingDirection FacingDirection { get; private set; }
 
         // States
         SpriteAnimator walkDownAnim;
@@ -62,12 +70,16 @@ namespace Monster.Characters {
 
             if (MoveX == 1) {
                 currentAnim = walkRightAnim;
+                FacingDirection = FacingDirection.RIGHT;
             } else if (MoveX == -1) {
                 currentAnim = walkLeftAnim;
+                FacingDirection = FacingDirection.LEFT;
             } else if (MoveY == 1) {
                 currentAnim = walkUpAnim;
+                FacingDirection = FacingDirection.UP;
             } else if (MoveY == -1) {
                 currentAnim = walkDownAnim;
+                FacingDirection = FacingDirection.DOWN;
             }
 
             if (currentAnim != prevAnim || IsMoving != wasPreviouslyMoving) {
@@ -107,6 +119,7 @@ namespace Monster.Characters {
 
             if (currentAnim == null) {
                 currentAnim = walkDownAnim;
+                FacingDirection = FacingDirection.DOWN;
             }
         }
 

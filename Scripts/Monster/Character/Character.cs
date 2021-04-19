@@ -111,6 +111,24 @@ namespace Monster.Characters {
             return position;
         }
 
+        public Vector2 GetFrontCoordinates() {
+            switch(animator.FacingDirection) {
+                case FacingDirection.RIGHT: { 
+                    return (Vector2) transform.position + new Vector2(1f, 0f);
+                }
+                case FacingDirection.LEFT: { 
+                    return (Vector2) transform.position + new Vector2(-1f, 0f);
+                }
+                case FacingDirection.UP: { 
+                    return (Vector2) transform.position + new Vector2(0f, 1f);
+                }
+                case FacingDirection.DOWN:
+                default: { 
+                    return (Vector2) transform.position + new Vector2(0f, -1f);
+                }
+            }
+        }
+
         private bool IsPathClear(Vector3 targetPos) {
             var diff = targetPos - transform.position;
             var dir = diff.normalized;

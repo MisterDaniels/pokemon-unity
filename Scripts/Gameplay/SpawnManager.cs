@@ -17,10 +17,10 @@ namespace Core {
         }
 
         public void SpawnItemInWorld(Item item, Vector2 position) {
-            Transform transform = Instantiate(PrefabsReference.Instance.ItemOverworld.transform,
-                position, Quaternion.identity);
+            GameObject itemWorldInstance = Instantiate(PrefabsReference.Instance.ItemOverworld);
 
-            ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
+            ItemWorld itemWorld = itemWorldInstance.GetComponent<ItemWorld>();
+            itemWorld.SetObjectPositionAndSnapToTile(position);
             itemWorld.SetItem(item);
         }
 

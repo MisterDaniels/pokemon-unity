@@ -22,6 +22,7 @@ namespace Core.Admin {
         public static DebugCommand<string> ADD_ITEM;
         public static DebugCommand<string> SET_OUTFIT;
         public static DebugCommand<string> ADD_OUTFIT;
+        public static DebugCommand<string, string> DROP_ITEM;
         public static DebugCommand HELP;
 
         public List<object> commandList;
@@ -31,41 +32,18 @@ namespace Core.Admin {
         private void Awake() {
             Instance = this;
 
-            KILL_ALL = new DebugCommand("kill_all", "Removes all NPCs from the scene.", "kill_all", () => {
-                SpawnManager.Instance.KillAllNpcs();
-            });
-
-            ADD_ITEM = new DebugCommand<string>("add_item", "Sets item to player inventory", "add_item <itemName>", (itemName) => {
-                Inventory playerInventory = GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>();
-
-                ItemBase itemBase = (ItemBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Item/{ itemName }.asset", typeof(ItemBase));
-
-                playerInventory.AddItem(new Item(itemBase, 1));
-            });
-
-            SET_OUTFIT = new DebugCommand<string>("set_outfit", "Sets outfit to player", "set_outfit <outfitName>", (outfitName) => {
-                Character playerCharacter = GameController.Instance.PlayerController.gameObject.GetComponent<Character>();
-                
-                OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
-
-                playerCharacter.ChangeSprites(outfitBase);
-            });
-
-            ADD_OUTFIT = new DebugCommand<string>("add_outfit", "Add outfit to player", "add_outfit <outfitName>", (outfitName) => {
-                OutfitInventory playerOutfitInventory = GameController.Instance.PlayerController.gameObject.GetComponent<OutfitInventory>();
-                
-                OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
-
-                playerOutfitInventory.AddOutfit(outfitBase);
-            });
-
             HELP = new DebugCommand("help", "Shows a list of commands", "help", () => {
                 showHelp = true;
             });
 
+            LoadCommandItems();
+            LoadCommandOutfits();
+            LoadCommandRemoves();
+
             commandList = new List<object> {
                 KILL_ALL,
                 ADD_ITEM,
+                DROP_ITEM,
                 SET_OUTFIT,
                 ADD_OUTFIT,
                 HELP
@@ -131,9 +109,53 @@ namespace Core.Admin {
                         (commandList[i] as DebugCommand).Invoke();
                     } else if (commandList[i] as DebugCommand<string> != null) {
                         (commandList[i] as DebugCommand<string>).Invoke(properties[1]);
+                    } else if (commandList[i] as DebugCommand<string, string> != null) {
+                        (commandList[i] as DebugCommand<string, string>).Invoke(properties[1], properties[2]);
                     }
                 }
             }
+        }
+
+        private void LoadCommandRemoves() {
+            KILL_ALL = new DebugCommand("kill_all", "Removes all NPCs from the scene.", "kill_all", () => {
+                SpawnManager.Instance.KillAllNpcs();
+            });
+        }
+
+        private void LoadCommandItems() {
+            ADD_ITEM = new DebugCommand<string>("add_item", "Sets item to player inventory", "add_item <itemName>", (itemName) => {
+                Inventory playerInventory = GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>();
+
+                ItemBase itemBase = (ItemBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Item/{ itemName }.asset", typeof(ItemBase));
+
+                playerInventory.AddItem(new Item(itemBase, 1));
+            });
+
+            DROP_ITEM = new DebugCommand<string, string>("drop_item", "Drop an item in a optional place or in front of the command caller", 
+                "drop_item <itemName> <world_space>(optional)", (itemName, worldSpace) => {
+                    ItemBase itemBase = (ItemBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Item/{ itemName }.asset", typeof(ItemBase));
+
+                    SpawnManager.Instance.SpawnItemInWorld(new Item(itemBase, 1), 
+                        GameController.Instance.PlayerController.gameObject.GetComponent<Character>().GetFrontCoordinates());
+                });
+        }
+
+        private void LoadCommandOutfits() {
+            SET_OUTFIT = new DebugCommand<string>("set_outfit", "Sets outfit to player", "set_outfit <outfitName>", (outfitName) => {
+                Character playerCharacter = GameController.Instance.PlayerController.gameObject.GetComponent<Character>();
+                
+                OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
+
+                playerCharacter.ChangeSprites(outfitBase);
+            });
+
+            ADD_OUTFIT = new DebugCommand<string>("add_outfit", "Add outfit to player", "add_outfit <outfitName>", (outfitName) => {
+                OutfitInventory playerOutfitInventory = GameController.Instance.PlayerController.gameObject.GetComponent<OutfitInventory>();
+                
+                OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
+
+                playerOutfitInventory.AddOutfit(outfitBase);
+            });
         }
 
     }
