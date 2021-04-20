@@ -53,6 +53,18 @@ namespace Map {
             return dataFromTiles[frontTile].walkingSpeed;
         }
 
+        public void IntantiateTileInPosition(TileBase tile, Vector2 worldPosition) {
+            foreach(Tilemap tilemap in tilemaps) {
+                string tilemapSortingLayerName = tilemap.gameObject.GetComponent<TilemapRenderer>().sortingLayerName;
+
+                if (tilemapSortingLayerName == GameLayers.i.InstantiatedTileSortingLayerName) {
+                    Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);
+                    tilemap.SetTile(gridPosition, tile);
+                    break;
+                }
+            }
+        }
+
         private TileBase GetFrontTile(Vector2 worldPosition) {
             TileBase frontTile = null;
             TilemapRenderer.SortOrder frontSortOrder = 0;

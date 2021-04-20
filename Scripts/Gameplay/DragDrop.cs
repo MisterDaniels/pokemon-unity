@@ -83,7 +83,7 @@ namespace Core.Mechanic {
                 }
 
                 if (draggedGameObject && GameLayers.i.DraggableLayers == (GameLayers.i.DraggableLayers | (1 << draggedGameObject.layer))) {
-                    if (draggedGameObject.layer != GameLayers.i.InterfaceLayer) {
+                    if (draggedGameObject.GetComponent<SpriteRenderer>().sortingLayerName != GameLayers.i.InterfaceSortingLayerName) {
                         SetObjectPositionAndSnapToTile(itemHighlight.transform.position);
                     }
                 }

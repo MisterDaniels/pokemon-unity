@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 using UnityEditor;
 using Core;
 using Items;
 using Monster.Characters;
 using Monster.Outfits;
+using Map;
+using Map.Tile;
 
 namespace Core.Admin {
     
@@ -23,6 +26,7 @@ namespace Core.Admin {
         public static DebugCommand<string> SET_OUTFIT;
         public static DebugCommand<string> ADD_OUTFIT;
         public static DebugCommand<string, string> DROP_ITEM;
+        public static DebugCommand<string, string> CHANGE_TILE;
         public static DebugCommand HELP;
 
         public List<object> commandList;
@@ -39,6 +43,7 @@ namespace Core.Admin {
             LoadCommandItems();
             LoadCommandOutfits();
             LoadCommandRemoves();
+            LoadCommmandTiles();
 
             commandList = new List<object> {
                 KILL_ALL,
@@ -46,6 +51,7 @@ namespace Core.Admin {
                 DROP_ITEM,
                 SET_OUTFIT,
                 ADD_OUTFIT,
+                CHANGE_TILE,
                 HELP
             };
         }
@@ -123,7 +129,7 @@ namespace Core.Admin {
         }
 
         private void LoadCommandItems() {
-            ADD_ITEM = new DebugCommand<string>("add_item", "Sets item to player inventory", "add_item <itemName>", (itemName) => {
+            ADD_ITEM = new DebugCommand<string>("add_item", "Sets item to player inventory", "add_item <item_name>", (itemName) => {
                 Inventory playerInventory = GameController.Instance.PlayerController.gameObject.GetComponent<Inventory>();
 
                 ItemBase itemBase = (ItemBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Item/{ itemName }.asset", typeof(ItemBase));
@@ -132,7 +138,7 @@ namespace Core.Admin {
             });
 
             DROP_ITEM = new DebugCommand<string, string>("drop_item", "Drop an item in a optional place or in front of the command caller", 
-                "drop_item <itemName> <world_space>(optional)", (itemName, worldSpace) => {
+                "drop_item <item_name> <world_space>(optional)", (itemName, worldSpace) => {
                     ItemBase itemBase = (ItemBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Item/{ itemName }.asset", typeof(ItemBase));
 
                     SpawnManager.Instance.SpawnItemInWorld(new Item(itemBase, 1), 
@@ -141,7 +147,7 @@ namespace Core.Admin {
         }
 
         private void LoadCommandOutfits() {
-            SET_OUTFIT = new DebugCommand<string>("set_outfit", "Sets outfit to player", "set_outfit <outfitName>", (outfitName) => {
+            SET_OUTFIT = new DebugCommand<string>("set_outfit", "Sets outfit to player", "set_outfit <outfit_name>", (outfitName) => {
                 Character playerCharacter = GameController.Instance.PlayerController.gameObject.GetComponent<Character>();
                 
                 OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
@@ -149,13 +155,27 @@ namespace Core.Admin {
                 playerCharacter.ChangeSprites(outfitBase);
             });
 
-            ADD_OUTFIT = new DebugCommand<string>("add_outfit", "Add outfit to player", "add_outfit <outfitName>", (outfitName) => {
+            ADD_OUTFIT = new DebugCommand<string>("add_outfit", "Add outfit to player", "add_outfit <outfit_name>", (outfitName) => {
                 OutfitInventory playerOutfitInventory = GameController.Instance.PlayerController.gameObject.GetComponent<OutfitInventory>();
                 
                 OutfitBase outfitBase = (OutfitBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Outfit/{ outfitName }.asset", typeof(OutfitBase));
 
                 playerOutfitInventory.AddOutfit(outfitBase);
             });
+        }
+
+        private void LoadCommmandTiles() {
+            CHANGE_TILE = new DebugCommand<string, string>("change_tile", "Change tile in front of the command caller", 
+                "change_tile <tile_group> <tile_index>", (tileGroup, tileIndex) => {
+                    TileDataBase tileDataBase = (TileDataBase) AssetDatabase.LoadAssetAtPath($"Assets/Resources/Map/Tile/{ tileGroup }.asset", typeof(TileDataBase));
+
+                    TileBase tile = tileDataBase.tiles[int.Parse(tileIndex)];
+
+                    
+
+                    MapManager.Instance.IntantiateTileInPosition(tile, 
+                        GameController.Instance.PlayerController.gameObject.GetComponent<Character>().GetFrontCoordinates());
+                });
         }
 
     }

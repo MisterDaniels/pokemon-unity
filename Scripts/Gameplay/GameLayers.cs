@@ -14,7 +14,8 @@ namespace Map {
         [SerializeField] LayerMask itemWorldLayer;
         [SerializeField] LayerMask pokemonLayer;
         [SerializeField] LayerMask portalLayer;
-        [SerializeField] LayerMask interfaceLayer;
+        [SerializeField] string interfaceSortingLayerName;
+        [SerializeField] string instantiatedTileSortingLayerName;
 
         public static GameLayers i { get; set; }
 
@@ -54,8 +55,12 @@ namespace Map {
             get => LongGrassLayer | portalLayer;
         }
 
-        public LayerMask InterfaceLayer {
-            get => interfaceLayer;
+        public string InterfaceSortingLayerName {
+            get => interfaceSortingLayerName;
+        }
+
+        public string InstantiatedTileSortingLayerName {
+            get => instantiatedTileSortingLayerName;
         }
 
         public LayerMask DraggableLayers {

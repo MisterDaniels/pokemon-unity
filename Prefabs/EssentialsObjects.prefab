@@ -710,7 +710,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -851419769
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7152930139536384079, guid: 112658fed8c4df014a9e9f01786e48f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -863,7 +863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3567e7231aa6e4e399e72da493c9779d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
   size: 30
 --- !u!114 &3691146420032147439
 MonoBehaviour:
@@ -3270,9 +3269,8 @@ MonoBehaviour:
   portalLayer:
     serializedVersion: 2
     m_Bits: 4096
-  interfaceLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  interfaceSortingLayerName: Interface
+  instantiatedTileSortingLayerName: TileInstantiated
 --- !u!114 &1007687129077724764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3373,6 +3371,7 @@ MonoBehaviour:
   tileDataBases:
   - {fileID: 11400000, guid: 7587820775310137ebc512b3914ec4f7, type: 2}
   - {fileID: 11400000, guid: 569347ed4c3d69f6aa0a3874e2092ccd, type: 2}
+  - {fileID: 11400000, guid: 41a0240680afdd2efa8654fdfc78e498, type: 2}
 --- !u!1 &1007687129147100010
 GameObject:
   m_ObjectHideFlags: 0
