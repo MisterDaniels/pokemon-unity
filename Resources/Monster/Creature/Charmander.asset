@@ -9,28 +9,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d2096f7b32c3fc46b4a1fc18984c8b7, type: 3}
+  m_Script: {fileID: 11500000, guid: ea12f249b2a80c4198273ce751598a9d, type: 3}
   m_Name: Charmander
   m_EditorClassIdentifier: 
   name: Charmander
-  description: "Charmander is a Fire type Pok\xE9mon introduced in Generation 1.
-    It is known as the Lizard Pok\xE9mon.\r"
-  frontSprite: {fileID: 21300000, guid: f5d776994fc0d1c4797fd4ad94001efc, type: 3}
-  backSprite: {fileID: 21300000, guid: f051014bd2217d74fb2d7107d5160009, type: 3}
+  description: It has a preference for hot things. When it rains, steam is said to
+    spout from the tip of its tail.
+  frontSprite: {fileID: 21300000, guid: 367f7a9ef9a49471ea4f59bfff8afda5, type: 3}
+  backSprite: {fileID: 21300000, guid: a144c929edc1c15c6ba40f06dae4ffc6, type: 3}
+  iconSprite: {fileID: 21300000, guid: a233d5cd0203d8ce88e20662a9df8e33, type: 3}
+  walkDownSprites:
+  - {fileID: 3432582381386852895, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -7972350962097598140, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -8243430465294251057, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -342630733680701459, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  walkUpSprites:
+  - {fileID: 2891155643271623127, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -5679183084833696406, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: 4168987499367921126, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -9032531550739380727, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  walkRightSprites:
+  - {fileID: -8528448425845489548, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -8019530284076595851, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: 3645513264324972552, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: 5410254312211363470, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  walkLeftSprites:
+  - {fileID: -8047111640141004586, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: 499364604493752538, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -4576657574596017499, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
+  - {fileID: -2232759367589831589, guid: 64075102729633d2b838cb7fc6c037b5, type: 3}
   mainType: 2
   subType: 0
+  pokemonSize: 0
   maxHp: 39
   attack: 52
   defence: 43
   speed: 65
   spAttack: 60
   spDefence: 50
-  learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 0757464a6a71c654c9b251686dc644d0, type: 2}
-    level: 1
-  - moveBase: {fileID: 11400000, guid: eda112d35d51853419dc9efe17bc11ff, type: 2}
-    level: 1
-  - moveBase: {fileID: 11400000, guid: 185eb75460356c54da0f9503f7eb6334, type: 2}
-    level: 4
-  - moveBase: {fileID: 11400000, guid: 423426758672f7141bc88db7b99445e5, type: 2}
-    level: 8
+  learnableMoves: []

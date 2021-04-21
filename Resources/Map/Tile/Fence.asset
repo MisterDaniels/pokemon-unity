@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc94d95bf8e3f3ce09aa011daef77698, type: 3}
+  m_Name: Fence
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: ce10e184d77e3cc6b98e9e534bd3466d, type: 2}
+  - {fileID: 11400000, guid: 2d3c258b18597194786673683cbe319b, type: 2}
+  - {fileID: 11400000, guid: fc8e508b2f3b6eb48af55f2313064985, type: 2}
+  - {fileID: 11400000, guid: f15b6814e2f8809feb3f99a8e654da02, type: 2}
+  - {fileID: 11400000, guid: e4857e4e1338390a78a9caa1118beb5a, type: 2}
+  - {fileID: 11400000, guid: e0086489c65741ac7bc62602ced53bf4, type: 2}
+  - {fileID: 11400000, guid: d6f600308f2ae0a4185897d47c6772bc, type: 2}
+  - {fileID: 11400000, guid: 070fd64d0c94f04a4a71a476279f55bd, type: 2}
+  - {fileID: 11400000, guid: d51ee29221d6bce428e748a395626e97, type: 2}
+  - {fileID: 11400000, guid: f7925910cd21905dca3c89c5d2a8d39c, type: 2}
+  - {fileID: 11400000, guid: 5add2aa03f91acead99aa285e4b29860, type: 2}
+  - {fileID: 11400000, guid: c11389abfdec17949a28e553d27ae578, type: 2}
+  - {fileID: 11400000, guid: e3f9f1addf4878b72b3dc1dd45ac41ca, type: 2}
+  - {fileID: 11400000, guid: 8b9e243357bade111a224ef151eebc5c, type: 2}
+  - {fileID: 11400000, guid: e9a0e82d81696903fbb42b30ef07aa86, type: 2}
+  - {fileID: 11400000, guid: d219a710725b49175ae588b11243ec43, type: 2}
+  - {fileID: 11400000, guid: ac7831d5e5a75ac44951bd16fa6d270a, type: 2}
+  - {fileID: 11400000, guid: a2604dc5e5d97e98b81d5676fbd60cd9, type: 2}
+  - {fileID: 11400000, guid: 7b5e62012f749b227997fb7cedb1c59e, type: 2}
+  - {fileID: 11400000, guid: a677b0b9dd6355272ab562fa9a9596ac, type: 2}
+  - {fileID: 11400000, guid: 834ac030bd24700aea8118fdf4cb115f, type: 2}
+  - {fileID: 11400000, guid: 2e53c23a9bf85576084891f0b97adac0, type: 2}
+  - {fileID: 11400000, guid: ee7a20489282054c4afdf047f59280ee, type: 2}
+  - {fileID: 11400000, guid: 08cfd427b9698b6ed8d928f9a3301070, type: 2}
+  - {fileID: 11400000, guid: b101403981cf7b4ed935b663b86f404d, type: 2}
+  - {fileID: 11400000, guid: 86f854d802013f2d9a705c72b95c95ce, type: 2}
+  - {fileID: 11400000, guid: c442d522bd7d448aaa7ab52f7525ba5d, type: 2}
+  - {fileID: 11400000, guid: f82fe46196db08b11a595f7d10b5b002, type: 2}
+  - {fileID: 11400000, guid: b432d1dfe76c596a287715ec3554c804, type: 2}
+  - {fileID: 11400000, guid: 2fe844f4804f6186f8c5c85cf45fb823, type: 2}
+  - {fileID: 11400000, guid: b2b3f50ab0535c1dc85d395db500a45b, type: 2}
+  walkingSpeed: 1
+  hasCollision: 1

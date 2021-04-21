@@ -5,6 +5,7 @@ using UnityEngine;
 using Core.Mechanic;
 using Util;
 using Map;
+using Map.Tile;
 using Monster.Creature;
 using Monster.Outfits;
 
@@ -51,6 +52,12 @@ namespace Monster.Characters {
             targetPos.y += moveVec.y;
 
             if (!IsPathClear(targetPos)) {
+                yield break;
+            }
+
+            TileDataBase tileData = MapManager.Instance.GetTileData(targetPos);
+
+            if (tileData == null || !tileData.canWalk) {
                 yield break;
             }
 

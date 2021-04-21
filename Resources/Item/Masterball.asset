@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6312cdc850b20d60e8408481226f24ad, type: 3}
-  m_Name: Pokeball
+  m_Name: Masterball
   m_EditorClassIdentifier: 
-  name: Pokeball
-  description: Description
-  sprite: {fileID: 21300000, guid: 506e64e7345c62527893d6f7d51bc6b8, type: 3}
-  rarenessType: 0
+  name: Masterball
+  description: Masterball
+  sprite: {fileID: 21300000, guid: 8a4595e50a0e47ce992d9678ff051634, type: 3}
+  rarenessType: 1
   pokemon:
     _base: {fileID: 0}
     level: 0
-  catchRate: 10
+  catchRate: 100

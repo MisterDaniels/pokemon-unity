@@ -11,7 +11,7 @@ namespace Map.Tile {
         public TileBase[] tiles;
 
         public float walkingSpeed;
-        public bool hasCollision;
+        public bool canWalk;
 
     }
 

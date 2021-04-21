@@ -33,24 +33,19 @@ namespace Map {
             Instance = this;
         }
 
-        private void Update() {
-            if (Input.GetMouseButtonDown(0)) {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                TileBase frontTile = GetFrontTile(mousePosition);
-
-                float walkingSpeed = GetTileWalkingSpeed(mousePosition);
-            }
-        }
-
-        public float GetTileWalkingSpeed(Vector2 worldPosition) {
+        public TileDataBase GetTileData(Vector2 worldPosition) {
             TileBase frontTile = GetFrontTile(worldPosition);
 
             if (frontTile == null) {
-                return 1;
+                TileDataBase tileData = (TileDataBase) ScriptableObject.CreateInstance(typeof(TileDataBase));
+
+                tileData.canWalk = true;
+                tileData.walkingSpeed = 1f;
+
+                return tileData;
             }
 
-            return dataFromTiles[frontTile].walkingSpeed;
+            return dataFromTiles[frontTile];
         }
 
         public void IntantiateTileInPosition(TileBase tile, Vector2 worldPosition) {

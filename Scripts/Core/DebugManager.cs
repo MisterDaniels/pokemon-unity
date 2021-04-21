@@ -171,8 +171,6 @@ namespace Core.Admin {
 
                     TileBase tile = tileDataBase.tiles[int.Parse(tileIndex)];
 
-                    
-
                     MapManager.Instance.IntantiateTileInPosition(tile, 
                         GameController.Instance.PlayerController.gameObject.GetComponent<Character>().GetFrontCoordinates());
                 });
