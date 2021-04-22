@@ -49,6 +49,8 @@ namespace Map {
         }
 
         public void IntantiateTileInPosition(TileBase tile, Vector2 worldPosition) {
+            worldPosition = NormalizePosition(worldPosition);
+
             foreach(Tilemap tilemap in tilemaps) {
                 string tilemapSortingLayerName = tilemap.gameObject.GetComponent<TilemapRenderer>().sortingLayerName;
 
@@ -61,6 +63,8 @@ namespace Map {
         }
 
         private TileBase GetFrontTile(Vector2 worldPosition) {
+            worldPosition = NormalizePosition(worldPosition);
+
             TileBase frontTile = null;
             TilemapRenderer.SortOrder frontSortOrder = 0;
             foreach(Tilemap tilemap in tilemaps) {
@@ -79,6 +83,13 @@ namespace Map {
             }
 
             return frontTile;
+        }
+
+        private Vector2 NormalizePosition(Vector2 position) {
+            position.x = Mathf.Floor(position.x) + 0.5f;
+            position.y = Mathf.Ceil(position.y) - 0.5f;
+
+            return position;
         }
 
     }
