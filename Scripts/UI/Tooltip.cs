@@ -30,13 +30,14 @@ namespace UI {
                 CheckLayout();
             }
 
-            Vector2 position = Input.mousePosition;
+            Vector3 position = Input.mousePosition;
+            position.z = 1f;
 
             float pivotX = position.x / Screen.width;
             float pivotY = position.y / Screen.height;
 
             rectTransform.pivot = new Vector2(pivotX, pivotY);
-            transform.position = position;
+            transform.position = Camera.main.ScreenToWorldPoint(position);
         }
 
         private void CheckLayout() {
