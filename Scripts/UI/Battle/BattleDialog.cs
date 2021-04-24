@@ -18,6 +18,8 @@ namespace UI.Battle {
         [SerializeField] List<Text> actionTexts;
         [SerializeField] List<GameObject> moveObjects;
 
+        public List<Text> ActionTexts => actionTexts;
+
         public void SetDialog(string dialog) {
             dialogText.text = dialog;
         }

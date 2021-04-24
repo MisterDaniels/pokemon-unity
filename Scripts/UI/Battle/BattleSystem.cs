@@ -22,6 +22,7 @@ namespace UI.Battle {
         [SerializeField] BattleHud playerHud;
         [SerializeField] BattleHud enemyHud;
         [SerializeField] BattleDialog dialogBox;
+        [SerializeField] PartyScreen partyScreen; 
 
         public event Action<bool> OnBattleOver;
 
@@ -46,6 +47,8 @@ namespace UI.Battle {
             enemyUnit.Setup(wildPokemon);
             enemyHud.SetData(enemyUnit.Pokemon);
 
+            partyScreen.Init();
+
             yield return dialogBox.TypeDialog($"A wild { enemyUnit.Pokemon.Base.Name } appeared");
 
             PlayerAction();
@@ -53,7 +56,7 @@ namespace UI.Battle {
 
         private void PlayerAction() {
             state = BattleState.PlayerAction;
-            StartCoroutine(dialogBox.TypeDialog("Choose and action"));
+            dialogBox.SetDialog("Choose an action");
             dialogBox.EnableActionSelector(true);
         }
 
@@ -154,7 +157,7 @@ namespace UI.Battle {
 
         private void HandleActionSelection() {
             if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                if (currentAction < 1) {
+                if (currentAction < dialogBox.ActionTexts.Count - 1) {
                     ++currentAction;
                 }
             } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -170,6 +173,11 @@ namespace UI.Battle {
                     PlayerMove();
                 } else if (currentAction == 1) {
                     // Run
+                } else if (currentAction == 2) {
+                    // Pokemon
+                    OpenPartyScreen();
+                } else if (currentAction == 3) {
+                    // Bag
                 }
             }
         }
@@ -192,8 +200,16 @@ namespace UI.Battle {
                 dialogBox.EnableDialogText(true);
                 
                 StartCoroutine(PerformPlayerMove());
+            } else if (Input.GetKeyDown(KeyCode.X)) {
+                dialogBox.EnableMoveSelector(false);
+                dialogBox.EnableDialogText(true);
+                PlayerAction();
             }
+        }
 
+        private void OpenPartyScreen() {
+            partyScreen.SetPartyData(playerParty.Pokemons);
+            partyScreen.gameObject.SetActive(true);
         }
 
     }

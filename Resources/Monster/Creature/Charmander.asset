@@ -47,4 +47,7 @@ MonoBehaviour:
   speed: 65
   spAttack: 60
   spDefence: 50
-  learnableMoves: []
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 1ea4340666e81a32a831011e38d40ddc, type: 2}
+    level: 1
+  saddleLocation: {x: 0, y: 0}
