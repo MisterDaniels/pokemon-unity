@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea12f249b2a80c4198273ce751598a9d, type: 3}
+  m_Name: Butterfree
+  m_EditorClassIdentifier: 
+  name: Butterfree
+  description: "Butterfree is a Bug/Flying type Pok\xE9mon introduced in Generation
+    1."
+  frontSprite: {fileID: 21300000, guid: 305903aab4424ec3ba8e906a5b8fa612, type: 3}
+  backSprite: {fileID: 21300000, guid: c571ff99e51659f3fbe48b2ec1e35944, type: 3}
+  iconSprite: {fileID: 21300000, guid: 2c823d69cd3107d0cba71315f27728f5, type: 3}
+  walkDownSprites:
+  - {fileID: -4405548165813298403, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: -778976828682025267, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 8515018179997842644, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 7732444574108177151, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  walkUpSprites:
+  - {fileID: 1274781716177591318, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 6391747976655557406, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 4107830513247565021, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: -6208094889904792452, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  walkRightSprites:
+  - {fileID: -2786336079844103352, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 5908800452918382267, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: -5581025696428609044, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 2069123309363324408, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  walkLeftSprites:
+  - {fileID: -5440405482866803548, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 835084188065417988, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: -8265043231655075384, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  - {fileID: 1309942319167523577, guid: 91f9763bf7b74f4fb8bb3fcda3e38124, type: 3}
+  mainType: 12
+  subType: 10
+  pokemonSize: 0
+  maxHp: 60
+  attack: 45
+  defence: 50
+  speed: 70
+  spAttack: 90
+  spDefence: 80
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 1ea4340666e81a32a831011e38d40ddc, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 0bc115558b357fd719648f43f10738a0, type: 2}
+    level: 12
+  saddleLocation: {x: 0, y: 0}

@@ -9,14 +9,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d2096f7b32c3fc46b4a1fc18984c8b7, type: 3}
+  m_Script: {fileID: 11500000, guid: ea12f249b2a80c4198273ce751598a9d, type: 3}
   m_Name: Bulbasaur
   m_EditorClassIdentifier: 
   name: Bulbasaur
-  description: "Bulbasaur is a Grass/Poison type Pok\xE9mon introduced in Generation
-    1. It is known as the Seed Pok\xE9mon.\r"
-  frontSprite: {fileID: 21300000, guid: 2d4bcf471bd16d342bd94cb27c844a5e, type: 3}
-  backSprite: {fileID: 21300000, guid: 8504e1bacf006c04db0eb99a819be16c, type: 3}
+  description: 
+  frontSprite: {fileID: 21300000, guid: 8073b922fb33a5302a1f05abf94dac07, type: 3}
+  backSprite: {fileID: 21300000, guid: 9b159fd969d57638ca55ebd2c14f8491, type: 3}
+  iconSprite: {fileID: 21300000, guid: f11e81facf3a2e28b8297ffc7c81c8cd, type: 3}
+  walkDownSprites:
+  - {fileID: -8321102221490951993, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: 3457449131224333571, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: 4928702187486806059, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -5941510006882076052, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  walkUpSprites:
+  - {fileID: 6869295539217428732, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: 2728922415487621353, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -6027300139535239225, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -8085516219742853655, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  walkRightSprites:
+  - {fileID: -7563271112979078444, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -4211794347225856940, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -5815293367654417206, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -8920764471358730195, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  walkLeftSprites:
+  - {fileID: 3945213324105191583, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -4479806877278595076, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -4311521012892716964, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
+  - {fileID: -2106540403949572163, guid: 0a01f59101552947e9b6f4179004cb7e, type: 3}
   mainType: 5
   subType: 8
   pokemonSize: 0
@@ -27,13 +47,8 @@ MonoBehaviour:
   spAttack: 65
   spDefence: 65
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 0757464a6a71c654c9b251686dc644d0, type: 2}
+  - moveBase: {fileID: 11400000, guid: 1ea4340666e81a32a831011e38d40ddc, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 89c4fb79a6dcc4047993a30994e30874, type: 2}
+  - moveBase: {fileID: 11400000, guid: c7d85e31f2c59edf9866f8f7912a2263, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: b0f493c1b41b0d54bb5a3e649af8c7e7, type: 2}
-    level: 3
-  - moveBase: {fileID: 11400000, guid: cf6733e79ce7c224a8539157fc5b3e9b, type: 2}
-    level: 6
-  - moveBase: {fileID: 11400000, guid: a82e2215b68b90c48a3bc1301cfba9c5, type: 2}
-    level: 9
+  saddleLocation: {x: 0, y: 0}

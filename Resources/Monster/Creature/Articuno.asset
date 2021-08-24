@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea12f249b2a80c4198273ce751598a9d, type: 3}
+  m_Name: Articuno
+  m_EditorClassIdentifier: 
+  name: Articuno
+  description: "It is known as the Freeze Pok\xE9mon."
+  frontSprite: {fileID: 21300000, guid: 0423ef2abaae86d6fa0d85c1e60db343, type: 3}
+  backSprite: {fileID: 21300000, guid: a10419e53fe5c487dbe3ecab85399143, type: 3}
+  iconSprite: {fileID: 21300000, guid: 7f96189350998ffcfa439ac42bcff7ce, type: 3}
+  walkDownSprites:
+  - {fileID: 6872035018144819986, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -5646322797082110855, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -6089252843101696869, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: 6456312971051912374, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  walkUpSprites:
+  - {fileID: 17841081472836840, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: 7735378443198684549, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -5584856896479929258, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -8255731699735838217, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  walkRightSprites:
+  - {fileID: -1559254407047184087, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: 6240307352393331805, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -8196163957151703554, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -5172973473080826391, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  walkLeftSprites:
+  - {fileID: 2935292959629914003, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: 3123230725509987683, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -9192407401276545155, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  - {fileID: -3131573790336406598, guid: 8bb94f8fa2139d20bb1a876fe4bd8d51, type: 3}
+  mainType: 6
+  subType: 10
+  pokemonSize: 2
+  maxHp: 90
+  attack: 85
+  defence: 100
+  speed: 85
+  spAttack: 95
+  spDefence: 125
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: d5870466307b55fc4b76ad6a84759d70, type: 2}
+    level: 5
+  saddleLocation: {x: 0, y: 0}

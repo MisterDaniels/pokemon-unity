@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Charizard
   m_EditorClassIdentifier: 
   name: Charizard
-  description: 
-  frontSprite: {fileID: 0}
-  backSprite: {fileID: 0}
+  description: "Charizard is a Fire/Flying type Pok\xE9mon introduced in Generation
+    1. It is known as the Flame Pok\xE9mon."
+  frontSprite: {fileID: 21300000, guid: e8ee67285c392fecdbff07c8a7086285, type: 3}
+  backSprite: {fileID: 21300000, guid: 544844a6c21968e6592e5000babb4506, type: 3}
   iconSprite: {fileID: 21300000, guid: d9ad7ec1556bfbae192a56ec08329de2, type: 3}
   walkDownSprites:
   - {fileID: 8569003786385872269, guid: bccb8d415bee5fb5192c8849c8d1373f, type: 3}
@@ -40,10 +41,15 @@ MonoBehaviour:
   mainType: 2
   subType: 10
   pokemonSize: 2
-  maxHp: 0
-  attack: 0
-  defence: 0
-  speed: 0
-  spAttack: 0
-  spDefence: 0
-  learnableMoves: []
+  maxHp: 78
+  attack: 84
+  defence: 78
+  speed: 100
+  spAttack: 109
+  spDefence: 85
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 05f13d7945a4a5fa29fd674d71a71f12, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: c7d85e31f2c59edf9866f8f7912a2263, type: 2}
+    level: 1
+  saddleLocation: {x: 0, y: 0}

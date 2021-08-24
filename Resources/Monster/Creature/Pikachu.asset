@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea12f249b2a80c4198273ce751598a9d, type: 3}
+  m_Name: Pikachu
+  m_EditorClassIdentifier: 
+  name: Pikachu
+  description: "It is known as the Mouse Pok\xE9mon."
+  frontSprite: {fileID: 21300000, guid: c69cd9687c41e840cae6aa74caae08af, type: 3}
+  backSprite: {fileID: 21300000, guid: 65a2a06bfe36852b197c547e52f44899, type: 3}
+  iconSprite: {fileID: 21300000, guid: c6273feb2fffe4ad995f7c8401934a19, type: 3}
+  walkDownSprites:
+  - {fileID: 8201201764749319361, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -6349243472910343182, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: 990686490082603853, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -5912225075349085443, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  walkUpSprites:
+  - {fileID: -7700933977026070337, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -3561689592130246249, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -2093088556799706313, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -6070707918382827428, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  walkRightSprites:
+  - {fileID: 4418454145189471255, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -8788773152576514715, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: 3633245298861505510, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -1610124034770767727, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  walkLeftSprites:
+  - {fileID: -7717924708465079599, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: 6444872882070726258, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -725454720962246023, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  - {fileID: -8724102876339439603, guid: 9d867367cd768462ca1f6266a330d500, type: 3}
+  mainType: 4
+  subType: 0
+  pokemonSize: 0
+  maxHp: 35
+  attack: 55
+  defence: 40
+  speed: 90
+  spAttack: 50
+  spDefence: 50
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: c7d85e31f2c59edf9866f8f7912a2263, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: f7d2e564d9c11f057846efe480ee0429, type: 2}
+    level: 4
+  saddleLocation: {x: 0, y: 0}

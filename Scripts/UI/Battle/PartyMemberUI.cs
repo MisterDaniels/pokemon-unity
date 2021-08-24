@@ -23,6 +23,14 @@ namespace UI.Battle {
             imageIcon.sprite = _pokemon.Base.IconSprite;
         }        
 
+        public void SetSelected(bool selected) {
+            if (selected) {
+                nameText.color = DialogManager.Instance.HightlightedColor;
+            } else {
+                nameText.color = Color.black;
+            }
+        }
+
     }
 
 }

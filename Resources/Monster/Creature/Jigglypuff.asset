@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea12f249b2a80c4198273ce751598a9d, type: 3}
+  m_Name: Jigglypuff
+  m_EditorClassIdentifier: 
+  name: Jigglypuff
+  description: "It is known as the Balloon Pok\xE9mon."
+  frontSprite: {fileID: 21300000, guid: 4f855652f343fc5e8b9ca2ebd6c01947, type: 3}
+  backSprite: {fileID: 21300000, guid: c7c3ddde5fd7cbd5ba405f2ad34a49fc, type: 3}
+  iconSprite: {fileID: 21300000, guid: 6f1996594f092c66dabdadd3a2c32b45, type: 3}
+  walkDownSprites:
+  - {fileID: -4605338166156892264, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -4855247713302195647, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -3470097381945596392, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: 6560789125533566207, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  walkUpSprites:
+  - {fileID: -6826048606166386489, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -5600086245704701580, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -73733294778328961, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: 7837461848756835074, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  walkRightSprites:
+  - {fileID: -3628088473848280301, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -2206007373458684025, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -9053859762850242895, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -5041212100414789951, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  walkLeftSprites:
+  - {fileID: -3629041015019947244, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: 8314190164088616817, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -2739561175716977748, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  - {fileID: -2894842842315077783, guid: 619e2b3cbb418846bac5f2acbb31fd0d, type: 3}
+  mainType: 1
+  subType: 18
+  pokemonSize: 0
+  maxHp: 115
+  attack: 45
+  defence: 20
+  speed: 20
+  spAttack: 45
+  spDefence: 25
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: ac8c969234e0fc09d96581a7120c68bf, type: 2}
+    level: 1
+  saddleLocation: {x: 0, y: 0}

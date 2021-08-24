@@ -240,6 +240,14 @@ namespace Monster.Creature {
         ExtraLarge
     }
 
+    public enum Stat {
+        Attack,
+        Defence,
+        SpAttack,
+        SpDefence,
+        Speed
+    }
+
     public class TypeChart {
 
         static float[][] chart = {

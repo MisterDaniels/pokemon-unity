@@ -48,6 +48,8 @@ MonoBehaviour:
   spAttack: 60
   spDefence: 50
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 1ea4340666e81a32a831011e38d40ddc, type: 2}
+  - moveBase: {fileID: 11400000, guid: c7d85e31f2c59edf9866f8f7912a2263, type: 2}
     level: 1
+  - moveBase: {fileID: 11400000, guid: 05f13d7945a4a5fa29fd674d71a71f12, type: 2}
+    level: 4
   saddleLocation: {x: 0, y: 0}
