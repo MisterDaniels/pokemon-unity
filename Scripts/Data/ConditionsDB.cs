@@ -7,6 +7,15 @@ namespace Monster.Creature.Data {
 
     public class ConditionsDB {
 
+        public static void Init() {
+            foreach(var kvp in Conditions) {
+                var conditionId = kvp.Key;
+                var condition = kvp.Value;
+
+                condition.Id = conditionId;
+            }
+        }
+
         public static Dictionary<ConditionID, Condition> Conditions { get; set; } = new Dictionary<ConditionID, Condition>() {
             {
                 ConditionID.psn,

@@ -32,6 +32,7 @@ namespace Monster.Creature {
 
         public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
         public bool HPChanged { get; set; }
+        public event System.Action OnStatusChanged;
 
         public void Init() {
             Moves = new List<Move>();
@@ -69,7 +70,7 @@ namespace Monster.Creature {
             Stats.Add(Stat.SpAttack, Mathf.FloorToInt((Base.SpAttack * Level) / 100f) + 5);
             Stats.Add(Stat.SpDefence, Mathf.FloorToInt((Base.SpDefence * Level) / 100f) + 5);
 
-            MaxHp = Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10;
+            MaxHp = Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10 + Level;
         }
 
         public int MaxHp { get; private set; }
@@ -171,13 +172,17 @@ namespace Monster.Creature {
         }
 
         public void SetStatus(ConditionID conditionId) {
+            if (Status != null) return;
+
             Status = ConditionsDB.Conditions[conditionId];
             Status?.OnStart?.Invoke(this);
             StatusChanges.Enqueue($"{Base.Name} {Status.StartMessage}");
+            OnStatusChanged?.Invoke();
         }
 
         public void CureStatus() {
             Status = null;
+            OnStatusChanged?.Invoke();
         }
 
         public void UpdateHP(int damage) {

@@ -8,6 +8,7 @@ using Map;
 using UI;
 using UI.Menus;
 using Core.Admin;
+using Monster.Creature.Data;
 
 namespace Core {
 
@@ -37,6 +38,8 @@ namespace Core {
 
         private void Awake() {
             Instance = this;
+
+            ConditionsDB.Init();
         }
 
         private void Start() {
