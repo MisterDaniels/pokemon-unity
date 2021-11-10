@@ -30,6 +30,17 @@ namespace Monster.Characters {
             }
         }
 
+        // TODO: return the index of the slot
+        public Item GetItemByName(String itemName) {
+            for (int i = 0; i < items.Count; i++) {
+                if (items[i].Base.Name == itemName) {
+                    return items[i];
+                }
+            }
+
+            return null;
+        }
+
         public void AddItem(Item item, int slotIndex = -1, Action<bool, Item> OnAddOver = null) {
             bool itemAdded = false;
             Item itemToDrop = null;
